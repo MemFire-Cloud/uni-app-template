@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@dcloudio/uni-ui": "^1.4.27",
+    "supabase-wechat-stable-v2": "^2.0.3"
+  }
+}

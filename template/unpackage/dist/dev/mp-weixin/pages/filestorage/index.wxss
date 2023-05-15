@@ -1,0 +1,4 @@
+
+.uni-table-td {
+	white-space: nowrap;
+}

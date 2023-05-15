@@ -1,0 +1,1 @@
+<view class="container"><view class="login"><button class="wechat" bindtap="{{a}}">微信用户一键登录</button><button class="phone" bindtap="{{b}}">手机登录/注册</button></view></view>
