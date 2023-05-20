@@ -40,7 +40,6 @@
 	</view>
 </template>
 <script>
-import { supabase } from '../../lib/supabaseClient'
 import { FetchTodo, FetchPage, SearchText, UpdateTodo, AddTodo, DeleteTodo } from './api';
 export default {
 	data() {
@@ -99,8 +98,6 @@ export default {
 		 * @param {Object} done
 		 */
 		close() {
-			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 close 才会关闭对话框
-			// ...
 			this.$refs.popup.close()
 		},
 		confirm() {
@@ -153,9 +150,6 @@ export default {
 		    this.end = e.current * 10 - 1;
 		    this.getTodoList(e.current * 10 - 10, e.current * 10 - 1);
 		},
-		getData() {
-
-		},
 	    addItem() {
 		   this.formData = {};
 		   this.todo_id = null;
@@ -174,7 +168,6 @@ export default {
 						icon: 'none',
 						duration: 2000
 					})
-
 				});
 		},
 		allCount() {

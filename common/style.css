@@ -154,6 +154,10 @@
    align-items: center;
    padding-top: 30rpx;
  }
+ .avatar-wrapper{
+  padding: 0;
+  height: 150rpx;
+}
  
  .avatar {
    width: 150rpx;
@@ -184,13 +188,13 @@
  }
  
  .submit {
-   width: 80%;
-   background: #1aad19;
-   color: #fff;
-   font-size: 16px;
-   text-align: center;
-   border-radius: 5rpx;
-   margin-top: 15rpx;
+  width: 86%;
+  background: #1aad19;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5rpx;
+  margin-top: 30rpx;
  }
 
 .search {

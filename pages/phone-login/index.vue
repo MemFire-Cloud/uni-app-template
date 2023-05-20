@@ -1,17 +1,17 @@
 <template>
 <view class="container">
-  <form>
-    <view class="inputView">
-      <input class="inputText"  placeholder="请输入手机号" name="phone" v-model="phone" />
-    </view>
-    <view class="inputView">
-      <input class="inputText" v-model="code" placeholder="请输入验证码" name="code" />
-      <button :class="disabled ? 'disabled line':'line'"  :type="disabled?'defalut':'primary'" :disabled="disabled" size="mini" @click="sendcode">{{codebtn}}</button>
-      </view>
-    <view class="loginBtnView">
-      <button class="loginBtn" type="primary" @click="submit">登录</button>
-    </view>
-  </form>
+    <form>
+		<view class="inputView">
+		<input class="inputText"  placeholder="请输入手机号" name="phone" v-model="phone" />
+    </view>
+    <view class="inputView">
+		<input class="inputText" v-model="code" placeholder="请输入验证码" name="code" />
+        <button :class="disabled ? 'disabled line':'line'"  :type="disabled?'defalut':'primary'" :disabled="disabled" size="mini" @click="sendcode">{{codebtn}}</button>
+	</view>
+	<view class="loginBtnView">
+		<button class="loginBtn" type="primary" @click="submit">登录</button>
+	</view>
+    </form>
 </view>
 </template>
 
@@ -40,7 +40,6 @@
 				  })
 				  return false;
 				}
-				var time = 60;
 				that.disabled = true;
 				let { data, error } = await supabase.auth.signInWithOtp({
 				  phone: phone,
@@ -88,8 +87,8 @@
 					  title: '登录成功,前往修改个人信息页面',
 					  duration: 1500
 					});
-					uni.switchTab({
-					  url: '/pages/tabBar/userinfo/index',
+					uni.navigateTo({
+					  url: '/pages/userinfo/index',
 					})
 				  }else{
 					uni.showToast({

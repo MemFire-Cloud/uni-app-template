@@ -21,9 +21,9 @@
 	export default {
 		data() {
 			return {
-				username: getApp().globalData.userInfo?.user_metadata.username ? getApp().globalData.userInfo.user_metadata.username : '',
-				avatar: getApp().globalData.userInfo?.user_metadata.avatar ? getApp().globalData.userInfo.user_metadata.avatar : '',
-				introduction: getApp().globalData.userInfo?.user_metadata.introduction ? getApp().globalData.userInfo.user_metadata.introduction : '',
+				username:'',
+				avatar: '',
+				introduction: '',
 				filePath:'',
 			}
 		},

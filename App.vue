@@ -7,7 +7,7 @@
 		onLaunch: async function() {
 			      const { data: { user }, error } = await supabase
 			        .auth.getUser()
-			      if (error) {
+			      if (error || !user) {
 					  uni.redirectTo({
 					  	url:'/pages/login/index'
 					  })

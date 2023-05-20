@@ -32,8 +32,6 @@
 		<view class="upload-section">
 			<view class="title">上传文件</view>
 			<view class="input-group">
-				<!-- <button class="upload-btn" type="primary" @click="onUpload">选择文件</button>
-				<view class="file-info">{{ fileName ? fileName : '未选择图片' }}</view> -->
 				<uni-file-picker v-model="fileValue" file-mediatype="all" @select="select" />
 			</view>
 		</view>
@@ -42,7 +40,7 @@
 
 <script>
 import { supabase } from '../../lib/supabaseClient'
-import { UploadFile, DownloadFile, RemoveFile, ListFile, ListProfixFile } from './api';
+import { UploadFile, RemoveFile, ListFile, ListProfixFile } from './api';
 export default {
 	data() {
 		return {
@@ -72,9 +70,7 @@ export default {
 							icon: 'none',
 							duration: 2000
 						})
-
 						this.getListFile()
-
 					})
 					.catch((err) => {
 						uni.showToast({
@@ -83,7 +79,6 @@ export default {
 							duration: 2000
 						});
 					})
-
 			}
 		},
 		async downloadFile(name) {
@@ -117,7 +112,6 @@ export default {
 											uni.openSetting({
 												success(settingdata) {
 													console.log('settingdata', settingdata)
-
 													if (settingdata.authSetting['scope.writePhotosAlbum']) {
 														uni.showModal({
 															title: '提示',
@@ -141,7 +135,6 @@ export default {
 											});
 										}
 									})
-
 								}
 							},
 							complete(res) {
@@ -166,13 +159,11 @@ export default {
 					}
 				}
 			})
-
 		},
 		getListFile() {
 			ListFile()
 				.then((res) => {
 					this.fileList = res
-
 				})
 				.catch((err) => {
 					uni.showToast({
@@ -195,7 +186,6 @@ export default {
 						duration: 2000
 					});
 				})
-
 		},
 		async removeFile(name) {
 			RemoveFile(name)
@@ -206,7 +196,6 @@ export default {
 						duration: 2000
 					});
 					this.getListFile()
-
 				})
 				.catch((err) => {
 					uni.showToast({
@@ -214,12 +203,10 @@ export default {
 						icon: 'none',
 						duration: 2000
 					})
-
 				});
 		},
 		onUpload() {
 			var that = this
-
 			uni.chooseMessageFile({
 				count: 1,
 				type: 'all',
@@ -228,26 +215,22 @@ export default {
 					delete res.tempFiles[0].path;
 					const file = res.tempFiles[0];
 					const filePath = res.tempFiles[0].name
-
 					that.fileName = filePath;
 					const { data, error } = await supabase.storage.from('files').upload(filePath, file, {
 						cacheControl: '3600'
 					})
-
 					if (error) {
 						wx.showToast({
 							title: error.message || error.error_description,
 							icon: 'none',
 							duration: 2000
 						})
-
 					} else {
 						wx.showToast({
 							title: '上传成功',
 							icon: 'none',
 							duration: 2000
 						})
-
 						that.ListFile();
 					}
 				}
