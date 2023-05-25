@@ -18,7 +18,7 @@ const _sfc_main = {
   },
   onLaunch: async function() {
     const { data: { user }, error } = await lib_supabaseClient.supabase.auth.getUser();
-    if (error) {
+    if (error || !user) {
       common_vendor.index.redirectTo({
         url: "/pages/login/index"
       });
@@ -33,7 +33,7 @@ const _sfc_main = {
     console.log("App Show");
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/project/uni-app/test/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   return {

@@ -14,12 +14,21 @@
 				</view>
 			</block>
 		</view>
-		<view>
-			<uni-list>
-				<uni-list-item :show-extra-icon="true" :extra-icon="extraIcon_user" title="完善信息" link to="/pages/userinfo/index"></uni-list-item>
-				<uni-list-item :show-extra-icon="true" :extraIcon="extraIcon_out" title="退出登录" link @click="loginOut($event)"></uni-list-item>
-			</uni-list>
-		</view>
+		<view class="list-wrapper"  v-if="hasUserInfo">
+		  <view class="row m32 mt64"  @click="goUserInfo">
+		    <view class="left-t t34">基本信息</view>
+		    <view class="right-t">
+		      <image src="../../../static/arrow.svg" />
+		    </view>
+		  </view>
+		
+		  <view class="row m32 mt64"  @click="loginOut">
+		    <view class="left-t t34">退出登录</view>
+		    <view class="right-t">
+		      <image src="../../../static/arrow.svg" />
+		    </view>
+		  </view>
+		  </view>
 	</view>
 </template>
 
@@ -66,6 +75,11 @@ export default {
 					url: '/pages/login/index'
 				});
 			}
+		},
+		goUserInfo(){
+			uni.navigateTo({
+			  url: "/pages/userinfo/index",
+			});
 		},
 		async setUserInfo(userInfo) {
 			if (userInfo != null) {

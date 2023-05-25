@@ -1502,8 +1502,8 @@ function populateParameters(fromRes, toRes) {
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.7.11",
-    uniRuntimeVersion: "3.7.11",
+    uniCompileVersion: "3.7.9",
+    uniRuntimeVersion: "3.7.9",
     uniPlatform: "mp-weixin",
     deviceBrand,
     deviceModel: model,
@@ -17109,28 +17109,27 @@ const pages = [
   }
 ];
 const globalStyle = {
-  navigationBarTextStyle: "black",
-  navigationBarTitleText: "uni-app",
-  navigationBarBackgroundColor: "#F8F8F8",
-  backgroundColor: "#F8F8F8"
+  backgroundColor: "#FFFFFF",
+  backgroundTextStyle: "light",
+  navigationBarBackgroundColor: "#FFF",
+  navigationBarTextStyle: "black"
 };
 const uniIdRouter = {};
 const tabBar = {
-  color: "#7A7E83",
-  selectedColor: "#007AFF",
-  borderStyle: "black",
-  backgroundColor: "#F8F8F8",
+  color: "#777777",
+  selectedColor: "#f76012",
+  borderStyle: "white",
   list: [
     {
       pagePath: "pages/tabBar/index/index",
-      iconPath: "static/index_off.png",
-      selectedIconPath: "static/index_on.png",
+      iconPath: "static/my-off.png",
+      selectedIconPath: "static/my-on.png",
       text: "首页"
     },
     {
       pagePath: "pages/tabBar/me/me",
-      iconPath: "static/mine_off.png",
-      selectedIconPath: "static/mine_on.png",
+      iconPath: "static/index-off.png",
+      selectedIconPath: "static/index-on.png",
       text: "我的"
     }
   ]
@@ -17231,7 +17230,7 @@ var r = s(function(e2, t2) {
       for (var t4 = e4.length, n4 = [], s3 = 0; s3 < t4; s3++)
         n4[s3 >>> 2] |= (255 & e4.charCodeAt(s3)) << 24 - s3 % 4 * 8;
       return new o2.init(n4, t4);
-    } }, h2 = a2.Utf8 = { stringify: function(e4) {
+    } }, l2 = a2.Utf8 = { stringify: function(e4) {
       try {
         return decodeURIComponent(escape(u2.stringify(e4)));
       } catch (e5) {
@@ -17239,27 +17238,27 @@ var r = s(function(e2, t2) {
       }
     }, parse: function(e4) {
       return u2.parse(unescape(encodeURIComponent(e4)));
-    } }, l2 = r2.BufferedBlockAlgorithm = i2.extend({ reset: function() {
+    } }, h2 = r2.BufferedBlockAlgorithm = i2.extend({ reset: function() {
       this._data = new o2.init(), this._nDataBytes = 0;
     }, _append: function(e4) {
-      "string" == typeof e4 && (e4 = h2.parse(e4)), this._data.concat(e4), this._nDataBytes += e4.sigBytes;
+      "string" == typeof e4 && (e4 = l2.parse(e4)), this._data.concat(e4), this._nDataBytes += e4.sigBytes;
     }, _process: function(t4) {
       var n4 = this._data, s3 = n4.words, r3 = n4.sigBytes, i3 = this.blockSize, a3 = r3 / (4 * i3), c3 = (a3 = t4 ? e3.ceil(a3) : e3.max((0 | a3) - this._minBufferSize, 0)) * i3, u3 = e3.min(4 * c3, r3);
       if (c3) {
-        for (var h3 = 0; h3 < c3; h3 += i3)
-          this._doProcessBlock(s3, h3);
-        var l3 = s3.splice(0, c3);
+        for (var l3 = 0; l3 < c3; l3 += i3)
+          this._doProcessBlock(s3, l3);
+        var h3 = s3.splice(0, c3);
         n4.sigBytes -= u3;
       }
-      return new o2.init(l3, u3);
+      return new o2.init(h3, u3);
     }, clone: function() {
       var e4 = i2.clone.call(this);
       return e4._data = this._data.clone(), e4;
     }, _minBufferSize: 0 });
-    r2.Hasher = l2.extend({ cfg: i2.extend(), init: function(e4) {
+    r2.Hasher = h2.extend({ cfg: i2.extend(), init: function(e4) {
       this.cfg = this.cfg.extend(e4), this.reset();
     }, reset: function() {
-      l2.reset.call(this), this._doReset();
+      h2.reset.call(this), this._doReset();
     }, update: function(e4) {
       return this._append(e4), this._process(), this;
     }, finalize: function(e4) {
@@ -17291,16 +17290,16 @@ var r = s(function(e2, t2) {
         var s3 = t4 + n3, r3 = e4[s3];
         e4[s3] = 16711935 & (r3 << 8 | r3 >>> 24) | 4278255360 & (r3 << 24 | r3 >>> 8);
       }
-      var i3 = this._hash.words, o3 = e4[t4 + 0], c3 = e4[t4 + 1], p2 = e4[t4 + 2], f2 = e4[t4 + 3], g2 = e4[t4 + 4], m2 = e4[t4 + 5], y2 = e4[t4 + 6], _2 = e4[t4 + 7], w2 = e4[t4 + 8], v2 = e4[t4 + 9], I2 = e4[t4 + 10], S2 = e4[t4 + 11], b2 = e4[t4 + 12], k2 = e4[t4 + 13], C = e4[t4 + 14], T2 = e4[t4 + 15], P2 = i3[0], A2 = i3[1], E2 = i3[2], O = i3[3];
-      P2 = u2(P2, A2, E2, O, o3, 7, a2[0]), O = u2(O, P2, A2, E2, c3, 12, a2[1]), E2 = u2(E2, O, P2, A2, p2, 17, a2[2]), A2 = u2(A2, E2, O, P2, f2, 22, a2[3]), P2 = u2(P2, A2, E2, O, g2, 7, a2[4]), O = u2(O, P2, A2, E2, m2, 12, a2[5]), E2 = u2(E2, O, P2, A2, y2, 17, a2[6]), A2 = u2(A2, E2, O, P2, _2, 22, a2[7]), P2 = u2(P2, A2, E2, O, w2, 7, a2[8]), O = u2(O, P2, A2, E2, v2, 12, a2[9]), E2 = u2(E2, O, P2, A2, I2, 17, a2[10]), A2 = u2(A2, E2, O, P2, S2, 22, a2[11]), P2 = u2(P2, A2, E2, O, b2, 7, a2[12]), O = u2(O, P2, A2, E2, k2, 12, a2[13]), E2 = u2(E2, O, P2, A2, C, 17, a2[14]), P2 = h2(P2, A2 = u2(A2, E2, O, P2, T2, 22, a2[15]), E2, O, c3, 5, a2[16]), O = h2(O, P2, A2, E2, y2, 9, a2[17]), E2 = h2(E2, O, P2, A2, S2, 14, a2[18]), A2 = h2(A2, E2, O, P2, o3, 20, a2[19]), P2 = h2(P2, A2, E2, O, m2, 5, a2[20]), O = h2(O, P2, A2, E2, I2, 9, a2[21]), E2 = h2(E2, O, P2, A2, T2, 14, a2[22]), A2 = h2(A2, E2, O, P2, g2, 20, a2[23]), P2 = h2(P2, A2, E2, O, v2, 5, a2[24]), O = h2(O, P2, A2, E2, C, 9, a2[25]), E2 = h2(E2, O, P2, A2, f2, 14, a2[26]), A2 = h2(A2, E2, O, P2, w2, 20, a2[27]), P2 = h2(P2, A2, E2, O, k2, 5, a2[28]), O = h2(O, P2, A2, E2, p2, 9, a2[29]), E2 = h2(E2, O, P2, A2, _2, 14, a2[30]), P2 = l2(P2, A2 = h2(A2, E2, O, P2, b2, 20, a2[31]), E2, O, m2, 4, a2[32]), O = l2(O, P2, A2, E2, w2, 11, a2[33]), E2 = l2(E2, O, P2, A2, S2, 16, a2[34]), A2 = l2(A2, E2, O, P2, C, 23, a2[35]), P2 = l2(P2, A2, E2, O, c3, 4, a2[36]), O = l2(O, P2, A2, E2, g2, 11, a2[37]), E2 = l2(E2, O, P2, A2, _2, 16, a2[38]), A2 = l2(A2, E2, O, P2, I2, 23, a2[39]), P2 = l2(P2, A2, E2, O, k2, 4, a2[40]), O = l2(O, P2, A2, E2, o3, 11, a2[41]), E2 = l2(E2, O, P2, A2, f2, 16, a2[42]), A2 = l2(A2, E2, O, P2, y2, 23, a2[43]), P2 = l2(P2, A2, E2, O, v2, 4, a2[44]), O = l2(O, P2, A2, E2, b2, 11, a2[45]), E2 = l2(E2, O, P2, A2, T2, 16, a2[46]), P2 = d2(P2, A2 = l2(A2, E2, O, P2, p2, 23, a2[47]), E2, O, o3, 6, a2[48]), O = d2(O, P2, A2, E2, _2, 10, a2[49]), E2 = d2(E2, O, P2, A2, C, 15, a2[50]), A2 = d2(A2, E2, O, P2, m2, 21, a2[51]), P2 = d2(P2, A2, E2, O, b2, 6, a2[52]), O = d2(O, P2, A2, E2, f2, 10, a2[53]), E2 = d2(E2, O, P2, A2, I2, 15, a2[54]), A2 = d2(A2, E2, O, P2, c3, 21, a2[55]), P2 = d2(P2, A2, E2, O, w2, 6, a2[56]), O = d2(O, P2, A2, E2, T2, 10, a2[57]), E2 = d2(E2, O, P2, A2, y2, 15, a2[58]), A2 = d2(A2, E2, O, P2, k2, 21, a2[59]), P2 = d2(P2, A2, E2, O, g2, 6, a2[60]), O = d2(O, P2, A2, E2, S2, 10, a2[61]), E2 = d2(E2, O, P2, A2, p2, 15, a2[62]), A2 = d2(A2, E2, O, P2, v2, 21, a2[63]), i3[0] = i3[0] + P2 | 0, i3[1] = i3[1] + A2 | 0, i3[2] = i3[2] + E2 | 0, i3[3] = i3[3] + O | 0;
+      var i3 = this._hash.words, o3 = e4[t4 + 0], c3 = e4[t4 + 1], p2 = e4[t4 + 2], f2 = e4[t4 + 3], g2 = e4[t4 + 4], m2 = e4[t4 + 5], y2 = e4[t4 + 6], _2 = e4[t4 + 7], w2 = e4[t4 + 8], v2 = e4[t4 + 9], S2 = e4[t4 + 10], b2 = e4[t4 + 11], k2 = e4[t4 + 12], I2 = e4[t4 + 13], T = e4[t4 + 14], C2 = e4[t4 + 15], A2 = i3[0], P2 = i3[1], E2 = i3[2], O = i3[3];
+      A2 = u2(A2, P2, E2, O, o3, 7, a2[0]), O = u2(O, A2, P2, E2, c3, 12, a2[1]), E2 = u2(E2, O, A2, P2, p2, 17, a2[2]), P2 = u2(P2, E2, O, A2, f2, 22, a2[3]), A2 = u2(A2, P2, E2, O, g2, 7, a2[4]), O = u2(O, A2, P2, E2, m2, 12, a2[5]), E2 = u2(E2, O, A2, P2, y2, 17, a2[6]), P2 = u2(P2, E2, O, A2, _2, 22, a2[7]), A2 = u2(A2, P2, E2, O, w2, 7, a2[8]), O = u2(O, A2, P2, E2, v2, 12, a2[9]), E2 = u2(E2, O, A2, P2, S2, 17, a2[10]), P2 = u2(P2, E2, O, A2, b2, 22, a2[11]), A2 = u2(A2, P2, E2, O, k2, 7, a2[12]), O = u2(O, A2, P2, E2, I2, 12, a2[13]), E2 = u2(E2, O, A2, P2, T, 17, a2[14]), A2 = l2(A2, P2 = u2(P2, E2, O, A2, C2, 22, a2[15]), E2, O, c3, 5, a2[16]), O = l2(O, A2, P2, E2, y2, 9, a2[17]), E2 = l2(E2, O, A2, P2, b2, 14, a2[18]), P2 = l2(P2, E2, O, A2, o3, 20, a2[19]), A2 = l2(A2, P2, E2, O, m2, 5, a2[20]), O = l2(O, A2, P2, E2, S2, 9, a2[21]), E2 = l2(E2, O, A2, P2, C2, 14, a2[22]), P2 = l2(P2, E2, O, A2, g2, 20, a2[23]), A2 = l2(A2, P2, E2, O, v2, 5, a2[24]), O = l2(O, A2, P2, E2, T, 9, a2[25]), E2 = l2(E2, O, A2, P2, f2, 14, a2[26]), P2 = l2(P2, E2, O, A2, w2, 20, a2[27]), A2 = l2(A2, P2, E2, O, I2, 5, a2[28]), O = l2(O, A2, P2, E2, p2, 9, a2[29]), E2 = l2(E2, O, A2, P2, _2, 14, a2[30]), A2 = h2(A2, P2 = l2(P2, E2, O, A2, k2, 20, a2[31]), E2, O, m2, 4, a2[32]), O = h2(O, A2, P2, E2, w2, 11, a2[33]), E2 = h2(E2, O, A2, P2, b2, 16, a2[34]), P2 = h2(P2, E2, O, A2, T, 23, a2[35]), A2 = h2(A2, P2, E2, O, c3, 4, a2[36]), O = h2(O, A2, P2, E2, g2, 11, a2[37]), E2 = h2(E2, O, A2, P2, _2, 16, a2[38]), P2 = h2(P2, E2, O, A2, S2, 23, a2[39]), A2 = h2(A2, P2, E2, O, I2, 4, a2[40]), O = h2(O, A2, P2, E2, o3, 11, a2[41]), E2 = h2(E2, O, A2, P2, f2, 16, a2[42]), P2 = h2(P2, E2, O, A2, y2, 23, a2[43]), A2 = h2(A2, P2, E2, O, v2, 4, a2[44]), O = h2(O, A2, P2, E2, k2, 11, a2[45]), E2 = h2(E2, O, A2, P2, C2, 16, a2[46]), A2 = d2(A2, P2 = h2(P2, E2, O, A2, p2, 23, a2[47]), E2, O, o3, 6, a2[48]), O = d2(O, A2, P2, E2, _2, 10, a2[49]), E2 = d2(E2, O, A2, P2, T, 15, a2[50]), P2 = d2(P2, E2, O, A2, m2, 21, a2[51]), A2 = d2(A2, P2, E2, O, k2, 6, a2[52]), O = d2(O, A2, P2, E2, f2, 10, a2[53]), E2 = d2(E2, O, A2, P2, S2, 15, a2[54]), P2 = d2(P2, E2, O, A2, c3, 21, a2[55]), A2 = d2(A2, P2, E2, O, w2, 6, a2[56]), O = d2(O, A2, P2, E2, C2, 10, a2[57]), E2 = d2(E2, O, A2, P2, y2, 15, a2[58]), P2 = d2(P2, E2, O, A2, I2, 21, a2[59]), A2 = d2(A2, P2, E2, O, g2, 6, a2[60]), O = d2(O, A2, P2, E2, b2, 10, a2[61]), E2 = d2(E2, O, A2, P2, p2, 15, a2[62]), P2 = d2(P2, E2, O, A2, v2, 21, a2[63]), i3[0] = i3[0] + A2 | 0, i3[1] = i3[1] + P2 | 0, i3[2] = i3[2] + E2 | 0, i3[3] = i3[3] + O | 0;
     }, _doFinalize: function() {
       var t4 = this._data, n3 = t4.words, s3 = 8 * this._nDataBytes, r3 = 8 * t4.sigBytes;
       n3[r3 >>> 5] |= 128 << 24 - r3 % 32;
       var i3 = e3.floor(s3 / 4294967296), o3 = s3;
       n3[15 + (r3 + 64 >>> 9 << 4)] = 16711935 & (i3 << 8 | i3 >>> 24) | 4278255360 & (i3 << 24 | i3 >>> 8), n3[14 + (r3 + 64 >>> 9 << 4)] = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8), t4.sigBytes = 4 * (n3.length + 1), this._process();
       for (var a3 = this._hash, c3 = a3.words, u3 = 0; u3 < 4; u3++) {
-        var h3 = c3[u3];
-        c3[u3] = 16711935 & (h3 << 8 | h3 >>> 24) | 4278255360 & (h3 << 24 | h3 >>> 8);
+        var l3 = c3[u3];
+        c3[u3] = 16711935 & (l3 << 8 | l3 >>> 24) | 4278255360 & (l3 << 24 | l3 >>> 8);
       }
       return a3;
     }, clone: function() {
@@ -17311,11 +17310,11 @@ var r = s(function(e2, t2) {
       var a3 = e4 + (t4 & n3 | ~t4 & s3) + r3 + o3;
       return (a3 << i3 | a3 >>> 32 - i3) + t4;
     }
-    function h2(e4, t4, n3, s3, r3, i3, o3) {
+    function l2(e4, t4, n3, s3, r3, i3, o3) {
       var a3 = e4 + (t4 & s3 | n3 & ~s3) + r3 + o3;
       return (a3 << i3 | a3 >>> 32 - i3) + t4;
     }
-    function l2(e4, t4, n3, s3, r3, i3, o3) {
+    function h2(e4, t4, n3, s3, r3, i3, o3) {
       var a3 = e4 + (t4 ^ n3 ^ s3) + r3 + o3;
       return (a3 << i3 | a3 >>> 32 - i3) + t4;
     }
@@ -17389,7 +17388,7 @@ var r = s(function(e2, t2) {
     }, _map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" };
   }(), n2.enc.Base64);
 });
-const u = "FUNCTION", h = "OBJECT", l = "CLIENT_DB", d = "pending", p = "fullfilled", f = "rejected";
+const u = "FUNCTION", l = "OBJECT", h = "CLIENT_DB", d = "pending", p = "fullfilled", f = "rejected";
 function g(e2) {
   return Object.prototype.toString.call(e2).slice(8, -1).toLowerCase();
 }
@@ -17409,7 +17408,7 @@ function _(e2) {
   };
 }
 const w = "REJECTED", v = "NOT_PENDING";
-class I {
+class S {
   constructor({ createPromise: e2, retryRule: t2 = w } = {}) {
     this.createPromise = e2, this.status = null, this.promise = null, this.retryRule = t2;
   }
@@ -17427,10 +17426,10 @@ class I {
     return this.needRetry ? (this.status = d, this.promise = this.createPromise().then((e2) => (this.status = p, Promise.resolve(e2)), (e2) => (this.status = f, Promise.reject(e2))), this.promise) : this.promise;
   }
 }
-function S(e2) {
+function b(e2) {
   return e2 && "string" == typeof e2 ? JSON.parse(e2) : e2;
 }
-const b = true, k = "mp-weixin", T = S([]), P = k, A = S(""), E = S("[]") || [];
+const k = true, I = "mp-weixin", C = b([]), A = I, P = b(""), E = b("[]") || [];
 let x = "";
 try {
   x = "__UNI__5F637A1";
@@ -17464,10 +17463,10 @@ function F(e2, t2) {
 function q(e2, t2) {
   return e2 && 0 !== e2.length ? e2.reduce((e3, n2) => e3.then(() => n2(t2)), Promise.resolve()) : Promise.resolve();
 }
-function M(e2, t2) {
+function K(e2, t2) {
   return N[e2] && N[e2][t2] || [];
 }
-function K(e2) {
+function M(e2) {
   D("callObject", e2);
 }
 const j = U("_globalUniCloudListener"), B = "response", $ = "needLogin", W = "refreshToken", z = "clientdb", J = "cloudfunction", H = "cloudobject";
@@ -17478,11 +17477,11 @@ function V(e2, t2) {
   const n2 = G(e2);
   n2.includes(t2) || n2.push(t2);
 }
-function Q(e2, t2) {
+function Y(e2, t2) {
   const n2 = G(e2), s2 = n2.indexOf(t2);
   -1 !== s2 && n2.splice(s2, 1);
 }
-function Y(e2, t2) {
+function Q(e2, t2) {
   const n2 = G(e2);
   for (let e3 = 0; e3 < n2.length; e3++) {
     (0, n2[e3])(t2);
@@ -17533,7 +17532,7 @@ let ae, ce;
 function ue() {
   return ae || (ae = index.getSystemInfoSync()), ae;
 }
-function he() {
+function le() {
   let e2, t2;
   try {
     if (index.getLaunchOptionsSync) {
@@ -17546,7 +17545,7 @@ function he() {
   }
   return { channel: e2, scene: t2 };
 }
-function le() {
+function he() {
   const e2 = index.getLocale && index.getLocale() || "en";
   if (ce)
     return { ...ce, locale: e2, LOCALE: e2 };
@@ -17554,7 +17553,7 @@ function le() {
   for (let e3 = 0; e3 < o2.length; e3++) {
     delete t2[o2[e3]];
   }
-  return ce = { PLATFORM: r2, OS: s2, APPID: i2, DEVICEID: n2, ...he(), ...t2 }, { ...ce, locale: e2, LOCALE: e2 };
+  return ce = { PLATFORM: r2, OS: s2, APPID: i2, DEVICEID: n2, ...le(), ...t2 }, { ...ce, locale: e2, LOCALE: e2 };
 }
 var de = { sign: function(e2, t2) {
   let n2 = "";
@@ -17583,7 +17582,7 @@ var ge = class {
     ["spaceId", "clientSecret"].forEach((t2) => {
       if (!Object.prototype.hasOwnProperty.call(e2, t2))
         throw new Error(fe("uniCloud.init.paramRequired", { param: t2 }));
-    }), this.config = Object.assign({}, { endpoint: 0 === e2.spaceId.indexOf("mp-") ? "https://api.next.bspapp.com" : "https://api.bspapp.com" }, e2), this.config.provider = "aliyun", this.config.requestUrl = this.config.endpoint + "/client", this.config.envType = this.config.envType || "public", this.config.accessTokenKey = "access_token_" + this.config.spaceId, this.adapter = se, this._getAccessTokenPromiseHub = new I({ createPromise: () => this.requestAuth(this.setupRequest({ method: "serverless.auth.user.anonymousAuthorize", params: "{}" }, "auth")).then((e3) => {
+    }), this.config = Object.assign({}, { endpoint: 0 === e2.spaceId.indexOf("mp-") ? "https://api.next.bspapp.com" : "https://api.bspapp.com" }, e2), this.config.provider = "aliyun", this.config.requestUrl = this.config.endpoint + "/client", this.config.envType = this.config.envType || "public", this.config.accessTokenKey = "access_token_" + this.config.spaceId, this.adapter = se, this._getAccessTokenPromiseHub = new S({ createPromise: () => this.requestAuth(this.setupRequest({ method: "serverless.auth.user.anonymousAuthorize", params: "{}" }, "auth")).then((e3) => {
       if (!e3.result || !e3.result.accessToken)
         throw new ne({ code: "AUTH_FAILED", message: "获取accessToken失败" });
       this.setAccessToken(e3.result.accessToken);
@@ -17657,7 +17656,7 @@ var ge = class {
       throw new ne({ code: "CLOUDPATH_REQUIRED", message: "cloudPath不可为空" });
     if (/:\/\//.test(t2))
       throw new ne({ code: "INVALID_PARAM", message: "cloudPath不合法" });
-    const i2 = r2 && r2.envType || this.config.envType, o2 = (await this.getOSSUploadOptionsFromPath({ env: i2, filename: t2 })).result, a2 = "https://" + o2.cdnDomain + "/" + o2.ossPath, { securityToken: c2, accessKeyId: u2, signature: h2, host: l2, ossPath: d2, id: p2, policy: f2, ossCallbackUrl: m2 } = o2, y2 = { "Cache-Control": "max-age=2592000", "Content-Disposition": "attachment", OSSAccessKeyId: u2, Signature: h2, host: l2, id: p2, key: d2, policy: f2, success_action_status: 200 };
+    const i2 = r2 && r2.envType || this.config.envType, o2 = (await this.getOSSUploadOptionsFromPath({ env: i2, filename: t2 })).result, a2 = "https://" + o2.cdnDomain + "/" + o2.ossPath, { securityToken: c2, accessKeyId: u2, signature: l2, host: h2, ossPath: d2, id: p2, policy: f2, ossCallbackUrl: m2 } = o2, y2 = { "Cache-Control": "max-age=2592000", "Content-Disposition": "attachment", OSSAccessKeyId: u2, Signature: l2, host: h2, id: p2, key: d2, policy: f2, success_action_status: 200 };
     if (c2 && (y2["x-oss-security-token"] = c2), m2) {
       const e3 = JSON.stringify({ callbackUrl: m2, callbackBody: JSON.stringify({ fileId: p2, spaceId: this.config.spaceId }), callbackBodyType: "application/json" });
       y2.callback = de.toBase64(e3);
@@ -17713,14 +17712,14 @@ const ve = () => {
   });
   return e2.promise = t2, e2;
 };
-function Ie(e2) {
+function Se(e2) {
   return void 0 === e2;
 }
-function Se(e2) {
+function be(e2) {
   return "[object Null]" === Object.prototype.toString.call(e2);
 }
-var be;
-function ke(e2) {
+var ke;
+function Ie(e2) {
   const t2 = (n2 = e2, "[object Array]" === Object.prototype.toString.call(n2) ? e2 : [e2]);
   var n2;
   for (const e3 of t2) {
@@ -17731,39 +17730,39 @@ function ke(e2) {
 }
 !function(e2) {
   e2.WEB = "web", e2.WX_MP = "wx_mp";
-}(be || (be = {}));
-const Ce = { adapter: null, runtime: void 0 }, Te = ["anonymousUuidKey"];
-class Pe extends we {
+}(ke || (ke = {}));
+const Te = { adapter: null, runtime: void 0 }, Ce = ["anonymousUuidKey"];
+class Ae extends we {
   constructor() {
-    super(), Ce.adapter.root.tcbObject || (Ce.adapter.root.tcbObject = {});
+    super(), Te.adapter.root.tcbObject || (Te.adapter.root.tcbObject = {});
   }
   setItem(e2, t2) {
-    Ce.adapter.root.tcbObject[e2] = t2;
+    Te.adapter.root.tcbObject[e2] = t2;
   }
   getItem(e2) {
-    return Ce.adapter.root.tcbObject[e2];
+    return Te.adapter.root.tcbObject[e2];
   }
   removeItem(e2) {
-    delete Ce.adapter.root.tcbObject[e2];
+    delete Te.adapter.root.tcbObject[e2];
   }
   clear() {
-    delete Ce.adapter.root.tcbObject;
+    delete Te.adapter.root.tcbObject;
   }
 }
-function Ae(e2, t2) {
+function Pe(e2, t2) {
   switch (e2) {
     case "local":
-      return t2.localStorage || new Pe();
+      return t2.localStorage || new Ae();
     case "none":
-      return new Pe();
+      return new Ae();
     default:
-      return t2.sessionStorage || new Pe();
+      return t2.sessionStorage || new Ae();
   }
 }
 class Ee {
   constructor(e2) {
     if (!this._storage) {
-      this._persistence = Ce.adapter.primaryStorage || e2.persistence, this._storage = Ae(this._persistence, Ce.adapter);
+      this._persistence = Te.adapter.primaryStorage || e2.persistence, this._storage = Pe(this._persistence, Te.adapter);
       const t2 = `access_token_${e2.env}`, n2 = `access_token_expire_${e2.env}`, s2 = `refresh_token_${e2.env}`, r2 = `anonymous_uuid_${e2.env}`, i2 = `login_type_${e2.env}`, o2 = `user_info_${e2.env}`;
       this.keys = { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2, anonymousUuidKey: r2, loginTypeKey: i2, userInfoKey: o2 };
     }
@@ -17773,13 +17772,13 @@ class Ee {
       return;
     const t2 = "local" === this._persistence;
     this._persistence = e2;
-    const n2 = Ae(e2, Ce.adapter);
+    const n2 = Pe(e2, Te.adapter);
     for (const e3 in this.keys) {
       const s2 = this.keys[e3];
-      if (t2 && Te.includes(e3))
+      if (t2 && Ce.includes(e3))
         continue;
       const r2 = this._storage.getItem(s2);
-      Ie(r2) || Se(r2) || (n2.setItem(s2, r2), this._storage.removeItem(s2));
+      Se(r2) || be(r2) || (n2.setItem(s2, r2), this._storage.removeItem(s2));
     }
     this._storage = n2;
   }
@@ -17870,7 +17869,7 @@ function Fe(e2, t2 = {}) {
 function qe(e2, t2) {
   Ne.off(e2, t2);
 }
-const Me = "loginStateChanged", Ke = "loginStateExpire", je = "loginTypeChanged", Be = "anonymousConverted", $e = "refreshAccessToken";
+const Ke = "loginStateChanged", Me = "loginStateExpire", je = "loginTypeChanged", Be = "anonymousConverted", $e = "refreshAccessToken";
 var We;
 !function(e2) {
   e2.ANONYMOUS = "ANONYMOUS", e2.WECHAT = "WECHAT", e2.WECHAT_PUBLIC = "WECHAT-PUBLIC", e2.WECHAT_OPEN = "WECHAT-OPEN", e2.CUSTOM = "CUSTOM", e2.EMAIL = "EMAIL", e2.USERNAME = "USERNAME", e2.NULL = "NULL";
@@ -17902,7 +17901,7 @@ function Ge() {
 class Ve {
   constructor(e2 = {}) {
     var t2;
-    this.config = e2, this._reqClass = new Ce.adapter.reqClass({ timeout: this.config.timeout, timeoutMsg: `请求在${this.config.timeout / 1e3}s内未完成，已中断`, restrictedMethods: ["post"] }), this._cache = Re(this.config.env), this._localCache = (t2 = this.config.env, xe[t2]), He(this._reqClass, "post", [Ge]), He(this._reqClass, "upload", [Ge]), He(this._reqClass, "download", [Ge]);
+    this.config = e2, this._reqClass = new Te.adapter.reqClass({ timeout: this.config.timeout, timeoutMsg: `请求在${this.config.timeout / 1e3}s内未完成，已中断`, restrictedMethods: ["post"] }), this._cache = Re(this.config.env), this._localCache = (t2 = this.config.env, xe[t2]), He(this._reqClass, "post", [Ge]), He(this._reqClass, "upload", [Ge]), He(this._reqClass, "download", [Ge]);
   }
   async post(e2) {
     return await this._reqClass.post(e2);
@@ -17939,7 +17938,7 @@ class Ve {
           const e4 = this._cache.getStore(r2), t3 = this._cache.getStore(n2), s3 = await this.send("auth.signInAnonymously", { anonymous_uuid: e4, refresh_token: t3 });
           return this.setRefreshToken(s3.refresh_token), this._refreshAccessToken();
         }
-        Fe(Ke), this._cache.removeStore(n2);
+        Fe(Me), this._cache.removeStore(n2);
       }
       throw new ne({ code: a2.data.code, message: `刷新access token失败：${a2.data.code}` });
     }
@@ -17977,9 +17976,9 @@ class Ve {
     n2 && n2.onUploadProgress && (a2.onUploadProgress = n2.onUploadProgress);
     const c2 = this._localCache.getStore(s2);
     c2 && (a2.headers["X-TCB-Trace"] = c2);
-    const { parse: u2, inQuery: h2, search: l2 } = t2;
+    const { parse: u2, inQuery: l2, search: h2 } = t2;
     let d2 = { env: this.config.env };
-    u2 && (d2.parse = true), h2 && (d2 = { ...h2, ...d2 });
+    u2 && (d2.parse = true), l2 && (d2 = { ...l2, ...d2 });
     let p2 = function(e3, t3, n3 = {}) {
       const s3 = /\?/.test(t3);
       let r3 = "";
@@ -17987,7 +17986,7 @@ class Ve {
         "" === r3 ? !s3 && (t3 += "?") : r3 += "&", r3 += `${e4}=${encodeURIComponent(n3[e4])}`;
       return /^http(s)?\:\/\//.test(t3 += r3) ? t3 : `${e3}${t3}`;
     }(ye, "//tcb-api.tencentcloudapi.com/web", d2);
-    l2 && (p2 += l2);
+    h2 && (p2 += h2);
     const f2 = await this.post({ url: p2, data: o2, ...a2 }), g2 = f2.header && f2.header["x-tcb-trace"];
     if (g2 && this._localCache.setStore(s2, g2), 200 !== Number(f2.status) && 200 !== Number(f2.statusCode) || !f2.data)
       throw new ne({ code: "NETWORK_ERROR", message: "network request error" });
@@ -18011,13 +18010,13 @@ class Ve {
     this._cache.removeStore(t2), this._cache.removeStore(n2), this._cache.setStore(s2, e2);
   }
 }
-const Qe = {};
-function Ye(e2) {
-  return Qe[e2];
+const Ye = {};
+function Qe(e2) {
+  return Ye[e2];
 }
 class Xe {
   constructor(e2) {
-    this.config = e2, this._cache = Re(e2.env), this._request = Ye(e2.env);
+    this.config = e2, this._cache = Re(e2.env), this._request = Qe(e2.env);
   }
   setRefreshToken(e2) {
     const { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2 } = this._cache.keys;
@@ -18040,7 +18039,7 @@ class Ze {
   constructor(e2) {
     if (!e2)
       throw new ne({ code: "PARAM_ERROR", message: "envId is not defined" });
-    this._envId = e2, this._cache = Re(this._envId), this._request = Ye(this._envId), this.setUserInfo();
+    this._envId = e2, this._cache = Re(this._envId), this._request = Qe(this._envId), this.setUserInfo();
   }
   linkWithTicket(e2) {
     if ("string" != typeof e2)
@@ -18120,7 +18119,7 @@ class tt extends Xe {
     this._cache.updatePersistence("local");
     const { anonymousUuidKey: e2, refreshTokenKey: t2 } = this._cache.keys, n2 = this._cache.getStore(e2) || void 0, s2 = this._cache.getStore(t2) || void 0, r2 = await this._request.send("auth.signInAnonymously", { anonymous_uuid: n2, refresh_token: s2 });
     if (r2.uuid && r2.refresh_token) {
-      this._setAnonymousUUID(r2.uuid), this.setRefreshToken(r2.refresh_token), await this._request.refreshAccessToken(), Fe(Me), Fe(je, { env: this.config.env, loginType: We.ANONYMOUS, persistence: "local" });
+      this._setAnonymousUUID(r2.uuid), this.setRefreshToken(r2.refresh_token), await this._request.refreshAccessToken(), Fe(Ke), Fe(je, { env: this.config.env, loginType: We.ANONYMOUS, persistence: "local" });
       const e3 = new et(this.config.env);
       return await e3.user.refresh(), e3;
     }
@@ -18146,7 +18145,7 @@ class nt extends Xe {
       throw new ne({ code: "PARAM_ERROR", message: "ticket must be a string" });
     const { refreshTokenKey: t2 } = this._cache.keys, n2 = await this._request.send("auth.signInWithTicket", { ticket: e2, refresh_token: this._cache.getStore(t2) || "" });
     if (n2.refresh_token)
-      return this.setRefreshToken(n2.refresh_token), await this._request.refreshAccessToken(), Fe(Me), Fe(je, { env: this.config.env, loginType: We.CUSTOM, persistence: this.config.persistence }), await this.refreshUserInfo(), new et(this.config.env);
+      return this.setRefreshToken(n2.refresh_token), await this._request.refreshAccessToken(), Fe(Ke), Fe(je, { env: this.config.env, loginType: We.CUSTOM, persistence: this.config.persistence }), await this.refreshUserInfo(), new et(this.config.env);
     throw new ne({ message: "自定义登录失败" });
   }
 }
@@ -18156,7 +18155,7 @@ class st extends Xe {
       throw new ne({ code: "PARAM_ERROR", message: "email must be a string" });
     const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: "EMAIL", email: e2, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: r2, access_token: i2, access_token_expire: o2 } = s2;
     if (r2)
-      return this.setRefreshToken(r2), i2 && o2 ? this.setAccessToken(i2, o2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Fe(Me), Fe(je, { env: this.config.env, loginType: We.EMAIL, persistence: this.config.persistence }), new et(this.config.env);
+      return this.setRefreshToken(r2), i2 && o2 ? this.setAccessToken(i2, o2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Fe(Ke), Fe(je, { env: this.config.env, loginType: We.EMAIL, persistence: this.config.persistence }), new et(this.config.env);
     throw s2.code ? new ne({ code: s2.code, message: `邮箱登录失败: ${s2.message}` }) : new ne({ message: "邮箱登录失败" });
   }
   async activate(e2) {
@@ -18173,13 +18172,13 @@ class rt extends Xe {
     "string" != typeof t2 && (t2 = "", console.warn("password is empty"));
     const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: We.USERNAME, username: e2, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: r2, access_token_expire: i2, access_token: o2 } = s2;
     if (r2)
-      return this.setRefreshToken(r2), o2 && i2 ? this.setAccessToken(o2, i2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Fe(Me), Fe(je, { env: this.config.env, loginType: We.USERNAME, persistence: this.config.persistence }), new et(this.config.env);
+      return this.setRefreshToken(r2), o2 && i2 ? this.setAccessToken(o2, i2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Fe(Ke), Fe(je, { env: this.config.env, loginType: We.USERNAME, persistence: this.config.persistence }), new et(this.config.env);
     throw s2.code ? new ne({ code: s2.code, message: `用户名密码登录失败: ${s2.message}` }) : new ne({ message: "用户名密码登录失败" });
   }
 }
 class it {
   constructor(e2) {
-    this.config = e2, this._cache = Re(e2.env), this._request = Ye(e2.env), this._onAnonymousConverted = this._onAnonymousConverted.bind(this), this._onLoginTypeChanged = this._onLoginTypeChanged.bind(this), De(je, this._onLoginTypeChanged);
+    this.config = e2, this._cache = Re(e2.env), this._request = Qe(e2.env), this._onAnonymousConverted = this._onAnonymousConverted.bind(this), this._onLoginTypeChanged = this._onLoginTypeChanged.bind(this), De(je, this._onLoginTypeChanged);
   }
   get currentUser() {
     const e2 = this.hasLoginState();
@@ -18220,7 +18219,7 @@ class it {
     if (!s2)
       return;
     const r2 = await this._request.send("auth.logout", { refresh_token: s2 });
-    return this._cache.removeStore(e2), this._cache.removeStore(t2), this._cache.removeStore(n2), Fe(Me), Fe(je, { env: this.config.env, loginType: We.NULL, persistence: this.config.persistence }), r2;
+    return this._cache.removeStore(e2), this._cache.removeStore(t2), this._cache.removeStore(n2), Fe(Ke), Fe(je, { env: this.config.env, loginType: We.NULL, persistence: this.config.persistence }), r2;
   }
   async signUpWithEmailAndPassword(e2, t2) {
     return this._request.send("auth.signUpWithEmailAndPassword", { email: e2, password: t2 });
@@ -18229,7 +18228,7 @@ class it {
     return this._request.send("auth.sendPasswordResetEmail", { email: e2 });
   }
   onLoginStateChanged(e2) {
-    De(Me, () => {
+    De(Ke, () => {
       const t3 = this.hasLoginState();
       e2.call(this, t3);
     });
@@ -18237,7 +18236,7 @@ class it {
     e2.call(this, t2);
   }
   onLoginStateExpired(e2) {
-    De(Ke, e2.bind(this));
+    De(Me, e2.bind(this));
   }
   onAccessTokenRefreshed(e2) {
     De($e, e2.bind(this));
@@ -18291,11 +18290,11 @@ class it {
 }
 const ot = function(e2, t2) {
   t2 = t2 || ve();
-  const n2 = Ye(this.config.env), { cloudPath: s2, filePath: r2, onUploadProgress: i2, fileType: o2 = "image" } = e2;
+  const n2 = Qe(this.config.env), { cloudPath: s2, filePath: r2, onUploadProgress: i2, fileType: o2 = "image" } = e2;
   return n2.send("storage.getUploadMetadata", { path: s2 }).then((e3) => {
-    const { data: { url: a2, authorization: c2, token: u2, fileId: h2, cosFileId: l2 }, requestId: d2 } = e3, p2 = { key: s2, signature: c2, "x-cos-meta-fileid": l2, success_action_status: "201", "x-cos-security-token": u2 };
+    const { data: { url: a2, authorization: c2, token: u2, fileId: l2, cosFileId: h2 }, requestId: d2 } = e3, p2 = { key: s2, signature: c2, "x-cos-meta-fileid": h2, success_action_status: "201", "x-cos-security-token": u2 };
     n2.upload({ url: a2, data: p2, file: r2, name: s2, fileType: o2, onUploadProgress: i2 }).then((e4) => {
-      201 === e4.statusCode ? t2(null, { fileID: h2, requestId: d2 }) : t2(new ne({ code: "STORAGE_REQUEST_FAIL", message: `STORAGE_REQUEST_FAIL: ${e4.data}` }));
+      201 === e4.statusCode ? t2(null, { fileID: l2, requestId: d2 }) : t2(new ne({ code: "STORAGE_REQUEST_FAIL", message: `STORAGE_REQUEST_FAIL: ${e4.data}` }));
     }).catch((e4) => {
       t2(e4);
     });
@@ -18304,7 +18303,7 @@ const ot = function(e2, t2) {
   }), t2.promise;
 }, at = function(e2, t2) {
   t2 = t2 || ve();
-  const n2 = Ye(this.config.env), { cloudPath: s2 } = e2;
+  const n2 = Qe(this.config.env), { cloudPath: s2 } = e2;
   return n2.send("storage.getUploadMetadata", { path: s2 }).then((e3) => {
     t2(null, e3);
   }).catch((e3) => {
@@ -18317,7 +18316,7 @@ const ot = function(e2, t2) {
     if (!t3 || "string" != typeof t3)
       return { code: "INVALID_PARAM", message: "fileList的元素必须是非空的字符串" };
   const n2 = { fileid_list: e2 };
-  return Ye(this.config.env).send("storage.batchDeleteFile", n2).then((e3) => {
+  return Qe(this.config.env).send("storage.batchDeleteFile", n2).then((e3) => {
     e3.code ? t2(null, e3) : t2(null, { fileList: e3.data.delete_list, requestId: e3.requestId });
   }).catch((e3) => {
     t2(e3);
@@ -18328,23 +18327,23 @@ const ot = function(e2, t2) {
   for (let s3 of e2)
     "object" == typeof s3 ? (s3.hasOwnProperty("fileID") && s3.hasOwnProperty("maxAge") || t2(null, { code: "INVALID_PARAM", message: "fileList的元素必须是包含fileID和maxAge的对象" }), n2.push({ fileid: s3.fileID, max_age: s3.maxAge })) : "string" == typeof s3 ? n2.push({ fileid: s3 }) : t2(null, { code: "INVALID_PARAM", message: "fileList的元素必须是字符串" });
   const s2 = { file_list: n2 };
-  return Ye(this.config.env).send("storage.batchGetDownloadUrl", s2).then((e3) => {
+  return Qe(this.config.env).send("storage.batchGetDownloadUrl", s2).then((e3) => {
     e3.code ? t2(null, e3) : t2(null, { fileList: e3.data.download_list, requestId: e3.requestId });
   }).catch((e3) => {
     t2(e3);
   }), t2.promise;
-}, ht = async function({ fileID: e2 }, t2) {
+}, lt = async function({ fileID: e2 }, t2) {
   const n2 = (await ut.call(this, { fileList: [{ fileID: e2, maxAge: 600 }] })).fileList[0];
   if ("SUCCESS" !== n2.code)
     return t2 ? t2(n2) : new Promise((e3) => {
       e3(n2);
     });
-  const s2 = Ye(this.config.env);
+  const s2 = Qe(this.config.env);
   let r2 = n2.download_url;
   if (r2 = encodeURI(r2), !t2)
     return s2.download({ url: r2 });
   t2(await s2.download({ url: r2 }));
-}, lt = function({ name: e2, data: t2, query: n2, parse: s2, search: r2 }, i2) {
+}, ht = function({ name: e2, data: t2, query: n2, parse: s2, search: r2 }, i2) {
   const o2 = i2 || ve();
   let a2;
   try {
@@ -18355,7 +18354,7 @@ const ot = function(e2, t2) {
   if (!e2)
     return Promise.reject(new ne({ code: "PARAM_ERROR", message: "函数名不能为空" }));
   const c2 = { inQuery: n2, parse: s2, search: r2, function_name: e2, request_data: a2 };
-  return Ye(this.config.env).send("functions.invokeFunction", c2).then((e3) => {
+  return Qe(this.config.env).send("functions.invokeFunction", c2).then((e3) => {
     if (e3.code)
       o2(null, e3);
     else {
@@ -18379,7 +18378,7 @@ class ft {
     this.config = e2 || this.config, this.authObj = void 0;
   }
   init(e2) {
-    switch (Ce.adapter || (this.requestClient = new Ce.adapter.reqClass({ timeout: e2.timeout || 5e3, timeoutMsg: `请求在${(e2.timeout || 5e3) / 1e3}s内未完成，已中断` })), this.config = { ...dt, ...e2 }, true) {
+    switch (Te.adapter || (this.requestClient = new Te.adapter.reqClass({ timeout: e2.timeout || 5e3, timeoutMsg: `请求在${(e2.timeout || 5e3) / 1e3}s内未完成，已中断` })), this.config = { ...dt, ...e2 }, true) {
       case this.config.timeout > 6e5:
         console.warn("timeout大于可配置上限[10分钟]，已重置为上限数值"), this.config.timeout = 6e5;
         break;
@@ -18391,12 +18390,12 @@ class ft {
   auth({ persistence: e2 } = {}) {
     if (this.authObj)
       return this.authObj;
-    const t2 = e2 || Ce.adapter.primaryStorage || dt.persistence;
+    const t2 = e2 || Te.adapter.primaryStorage || dt.persistence;
     var n2;
     return t2 !== this.config.persistence && (this.config.persistence = t2), function(e3) {
       const { env: t3 } = e3;
       Oe[t3] = new Ee(e3), xe[t3] = new Ee({ ...e3, persistence: "local" });
-    }(this.config), n2 = this.config, Qe[n2.env] = new Ve(n2), this.authObj = new it(this.config), this.authObj;
+    }(this.config), n2 = this.config, Ye[n2.env] = new Ve(n2), this.authObj = new it(this.config), this.authObj;
   }
   on(e2, t2) {
     return De.apply(this, [e2, t2]);
@@ -18405,7 +18404,7 @@ class ft {
     return qe.apply(this, [e2, t2]);
   }
   callFunction(e2, t2) {
-    return lt.apply(this, [e2, t2]);
+    return ht.apply(this, [e2, t2]);
   }
   deleteFile(e2, t2) {
     return ct.apply(this, [e2, t2]);
@@ -18414,7 +18413,7 @@ class ft {
     return ut.apply(this, [e2, t2]);
   }
   downloadFile(e2, t2) {
-    return ht.apply(this, [e2, t2]);
+    return lt.apply(this, [e2, t2]);
   }
   uploadFile(e2, t2) {
     return ot.apply(this, [e2, t2]);
@@ -18432,8 +18431,8 @@ class ft {
     return await n2.invoke(t2, this);
   }
   useAdapters(e2) {
-    const { adapter: t2, runtime: n2 } = ke(e2) || {};
-    t2 && (Ce.adapter = t2), n2 && (Ce.runtime = n2);
+    const { adapter: t2, runtime: n2 } = Ie(e2) || {};
+    t2 && (Te.adapter = t2), n2 && (Te.runtime = n2);
   }
 }
 var gt = new ft();
@@ -18482,10 +18481,10 @@ var wt = { genAdapter: function() {
   return true;
 }, runtime: "uni_app" };
 gt.useAdapters(wt);
-const vt = gt, It = vt.init;
+const vt = gt, St = vt.init;
 vt.init = function(e2) {
   e2.env = e2.spaceId;
-  const t2 = It.call(this, e2);
+  const t2 = St.call(this, e2);
   t2.config.provider = "tencent", t2.config.spaceId = e2.spaceId;
   const n2 = t2.auth;
   return t2.auth = function(e3) {
@@ -18506,8 +18505,8 @@ vt.init = function(e2) {
     }), t3;
   }, t2.customAuth = t2.auth, t2;
 };
-var St = vt;
-var bt = class extends ge {
+var bt = vt;
+var kt = class extends ge {
   getAccessToken() {
     return new Promise((e2, t2) => {
       const n2 = "Anonymous_Access_token";
@@ -18517,7 +18516,7 @@ var bt = class extends ge {
   setupRequest(e2, t2) {
     const n2 = Object.assign({}, e2, { spaceId: this.config.spaceId, timestamp: Date.now() }), s2 = { "Content-Type": "application/json" };
     "auth" !== t2 && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = de.sign(n2, this.config.clientSecret);
-    const r2 = le();
+    const r2 = he();
     s2["x-client-info"] = encodeURIComponent(JSON.stringify(r2));
     const { token: i2 } = ie();
     return s2["x-client-token"] = i2, { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: JSON.parse(JSON.stringify(s2)) };
@@ -18566,8 +18565,8 @@ var bt = class extends ge {
     });
   }
 };
-var kt = { init(e2) {
-  const t2 = new bt(e2), n2 = { signInAnonymously: function() {
+var It = { init(e2) {
+  const t2 = new kt(e2), n2 = { signInAnonymously: function() {
     return t2.authorize();
   }, getLoginState: function() {
     return Promise.resolve(false);
@@ -18576,9 +18575,9 @@ var kt = { init(e2) {
     return n2;
   }, t2.customAuth = t2.auth, t2;
 } };
-function Ct({ data: e2 }) {
+function Tt({ data: e2 }) {
   let t2;
-  t2 = le();
+  t2 = he();
   const n2 = JSON.parse(JSON.stringify(e2 || {}));
   if (Object.assign(n2, { clientInfo: t2 }), !n2.uniIdToken) {
     const { token: e3 } = ie();
@@ -18586,11 +18585,11 @@ function Ct({ data: e2 }) {
   }
   return n2;
 }
-async function Tt({ name: e2, data: t2 } = {}) {
+async function Ct({ name: e2, data: t2 } = {}) {
   await this.__dev__.initLocalNetwork();
   const { localAddress: n2, localPort: s2 } = this.__dev__, r2 = { aliyun: "aliyun", tencent: "tcb" }[this.config.provider], i2 = this.config.spaceId, o2 = `http://${n2}:${s2}/system/check-function`, a2 = `http://${n2}:${s2}/cloudfunctions/${e2}`;
   return new Promise((t3, n3) => {
-    se.request({ method: "POST", url: o2, data: { name: e2, platform: P, provider: r2, spaceId: i2 }, timeout: 3e3, success(e3) {
+    se.request({ method: "POST", url: o2, data: { name: e2, platform: A, provider: r2, spaceId: i2 }, timeout: 3e3, success(e3) {
       t3(e3);
     }, fail() {
       t3({ data: { code: "NETWORK_ERROR", message: "连接本地调试服务失败，请检查客户端是否和主机在同一局域网下，自动切换为已部署的云函数。" } });
@@ -18624,38 +18623,38 @@ async function Tt({ name: e2, data: t2 } = {}) {
       return this._callCloudFunction({ name: e2, data: t2 });
     }
     return new Promise((e3, n4) => {
-      const s4 = Ct.call(this, { data: t2 });
-      se.request({ method: "POST", url: a2, data: { provider: r2, platform: P, param: s4 }, success: ({ statusCode: t3, data: s5 } = {}) => !t3 || t3 >= 400 ? n4(new ne({ code: s5.code || "SYS_ERR", message: s5.message || "request:fail" })) : e3({ result: s5 }), fail(e4) {
+      const s4 = Tt.call(this, { data: t2 });
+      se.request({ method: "POST", url: a2, data: { provider: r2, platform: A, param: s4 }, success: ({ statusCode: t3, data: s5 } = {}) => !t3 || t3 >= 400 ? n4(new ne({ code: s5.code || "SYS_ERR", message: s5.message || "request:fail" })) : e3({ result: s5 }), fail(e4) {
         n4(new ne({ code: e4.code || e4.errCode || "SYS_ERR", message: e4.message || e4.errMsg || "request:fail" }));
       } });
     });
   });
 }
-const Pt = [{ rule: /fc_function_not_found|FUNCTION_NOT_FOUND/, content: "，云函数[{functionName}]在云端不存在，请检查此云函数名称是否正确以及该云函数是否已上传到服务空间", mode: "append" }];
-var At = /[\\^$.*+?()[\]{}|]/g, Et = RegExp(At.source);
+const At = [{ rule: /fc_function_not_found|FUNCTION_NOT_FOUND/, content: "，云函数[{functionName}]在云端不存在，请检查此云函数名称是否正确以及该云函数是否已上传到服务空间", mode: "append" }];
+var Pt = /[\\^$.*+?()[\]{}|]/g, Et = RegExp(Pt.source);
 function Ot(e2, t2, n2) {
-  return e2.replace(new RegExp((s2 = t2) && Et.test(s2) ? s2.replace(At, "\\$&") : s2, "g"), n2);
+  return e2.replace(new RegExp((s2 = t2) && Et.test(s2) ? s2.replace(Pt, "\\$&") : s2, "g"), n2);
   var s2;
 }
 const Rt = "request", Ut = "response", Lt = "both";
 const yn = { code: 2e4, message: "System error" }, _n = { code: 20101, message: "Invalid client" };
-function In(e2) {
+function Sn(e2) {
   const { errSubject: t2, subject: n2, errCode: s2, errMsg: r2, code: i2, message: o2, cause: a2 } = e2 || {};
   return new ne({ subject: t2 || n2 || "uni-secure-network", code: s2 || i2 || yn.code, message: r2 || o2, cause: a2 });
 }
-let bn;
-function An({ secretType: e2 } = {}) {
+let kn;
+function Pn({ secretType: e2 } = {}) {
   return e2 === Rt || e2 === Ut || e2 === Lt;
 }
 function En({ name: e2, data: t2 = {} } = {}) {
-  return "app" === P;
+  return "app" === A;
 }
 function On({ provider: e2, spaceId: t2, functionName: n2 } = {}) {
   const { appId: s2, uniPlatform: r2, osName: i2 } = ue();
   let o2 = r2;
   "app" === r2 && (o2 = i2);
   const a2 = function({ provider: e3, spaceId: t3 } = {}) {
-    const n3 = T;
+    const n3 = C;
     if (!n3)
       return {};
     e3 = function(e4) {
@@ -18669,7 +18668,7 @@ function On({ provider: e2, spaceId: t2, functionName: n2 } = {}) {
   const c2 = a2.accessControl.function || {}, u2 = Object.keys(c2);
   if (0 === u2.length)
     return true;
-  const h2 = function(e3, t3) {
+  const l2 = function(e3, t3) {
     let n3, s3, r3;
     for (let i3 = 0; i3 < e3.length; i3++) {
       const o3 = e3[i3];
@@ -18677,11 +18676,11 @@ function On({ provider: e2, spaceId: t2, functionName: n2 } = {}) {
     }
     return n3 || s3 || r3;
   }(u2, n2);
-  if (!h2)
+  if (!l2)
     return false;
-  if ((c2[h2] || []).find((e3 = {}) => e3.appId === s2 && (e3.platform || "").toLowerCase() === o2.toLowerCase()))
+  if ((c2[l2] || []).find((e3 = {}) => e3.appId === s2 && (e3.platform || "").toLowerCase() === o2.toLowerCase()))
     return true;
-  throw console.error(`此应用[appId: ${s2}, platform: ${o2}]不在云端配置的允许访问的应用列表内，参考：https://uniapp.dcloud.net.cn/uniCloud/secure-network.html#verify-client`), In(_n);
+  throw console.error(`此应用[appId: ${s2}, platform: ${o2}]不在云端配置的允许访问的应用列表内，参考：https://uniapp.dcloud.net.cn/uniCloud/secure-network.html#verify-client`), Sn(_n);
 }
 function xn({ functionName: e2, result: t2, logPvd: n2 }) {
   if (this.__dev__.debugLog && t2 && t2.requestId) {
@@ -18692,8 +18691,8 @@ function xn({ functionName: e2, result: t2, logPvd: n2 }) {
 function Rn(e2) {
   const t2 = e2.callFunction, n2 = function(n3) {
     const s2 = n3.name;
-    n3.data = Ct.call(e2, { data: n3.data });
-    const r2 = { aliyun: "aliyun", tencent: "tcb", tcb: "tcb" }[this.config.provider], i2 = An(n3), o2 = En(n3), a2 = i2 || o2;
+    n3.data = Tt.call(e2, { data: n3.data });
+    const r2 = { aliyun: "aliyun", tencent: "tcb", tcb: "tcb" }[this.config.provider], i2 = Pn(n3), o2 = En(n3), a2 = i2 || o2;
     return t2.call(this, n3).then((e3) => (e3.errCode = 0, !a2 && xn.call(this, { functionName: s2, result: e3, logPvd: r2 }), Promise.resolve(e3)), (e3) => (!a2 && xn.call(this, { functionName: s2, result: e3, logPvd: r2 }), e3 && e3.message && (e3.message = function({ message: e4 = "", extraInfo: t3 = {}, formatter: n4 = [] } = {}) {
       for (let s3 = 0; s3 < n4.length; s3++) {
         const { rule: r3, content: i3, mode: o3 } = n4[s3], a3 = e4.match(r3);
@@ -18707,29 +18706,29 @@ function Rn(e2) {
         return "replace" === o3 ? c2 : e4 + c2;
       }
       return e4;
-    }({ message: `[${n3.name}]: ${e3.message}`, formatter: Pt, extraInfo: { functionName: s2 } })), Promise.reject(e3)));
+    }({ message: `[${n3.name}]: ${e3.message}`, formatter: At, extraInfo: { functionName: s2 } })), Promise.reject(e3)));
   };
   e2.callFunction = function(t3) {
     const { provider: s2, spaceId: r2 } = e2.config, i2 = t3.name;
     let o2, a2;
-    if (t3.data = t3.data || {}, e2.__dev__.debugInfo && !e2.__dev__.debugInfo.forceRemote && E ? (e2._callCloudFunction || (e2._callCloudFunction = n2, e2._callLocalFunction = Tt), o2 = Tt) : o2 = n2, o2 = o2.bind(e2), En(t3))
+    if (t3.data = t3.data || {}, e2.__dev__.debugInfo && !e2.__dev__.debugInfo.forceRemote && E ? (e2._callCloudFunction || (e2._callCloudFunction = n2, e2._callLocalFunction = Ct), o2 = Ct) : o2 = n2, o2 = o2.bind(e2), En(t3))
       ;
     else if (function({ name: e3, data: t4 = {} }) {
       return "uni-id-co" === e3 && "secureNetworkHandshakeByWeixin" === t4.method;
     }(t3))
       a2 = o2.call(e2, t3);
-    else if (An(t3)) {
-      a2 = new bn({ secretType: t3.secretType, uniCloudIns: e2 }).wrapEncryptDataCallFunction(n2.bind(e2))(t3);
+    else if (Pn(t3)) {
+      a2 = new kn({ secretType: t3.secretType, uniCloudIns: e2 }).wrapEncryptDataCallFunction(n2.bind(e2))(t3);
     } else if (On({ provider: s2, spaceId: r2, functionName: i2 })) {
-      a2 = new bn({ secretType: t3.secretType, uniCloudIns: e2 }).wrapVerifyClientCallFunction(n2.bind(e2))(t3);
+      a2 = new kn({ secretType: t3.secretType, uniCloudIns: e2 }).wrapVerifyClientCallFunction(n2.bind(e2))(t3);
     } else
       a2 = o2(t3);
     return Object.defineProperty(a2, "result", { get: () => (console.warn("当前返回结果为Promise类型，不可直接访问其result属性，详情请参考：https://uniapp.dcloud.net.cn/uniCloud/faq?id=promise"), {}) }), a2;
   };
 }
-bn = class {
+kn = class {
   constructor() {
-    throw In({ message: `Platform ${P} is not enabled, please check whether secure network module is enabled in your manifest.json` });
+    throw Sn({ message: `Platform ${A} is not enabled, please check whether secure network module is enabled in your manifest.json` });
   }
 };
 const Un = Symbol("CLIENT_DB_INTERNAL");
@@ -18775,10 +18774,10 @@ function qn(e2) {
       return e2;
   }
 }
-function Mn(e2) {
+function Kn(e2) {
   return e2 && e2.content && e2.content.$method;
 }
-class Kn {
+class Mn {
   constructor(e2, t2, n2) {
     this.content = e2, this.prevStage = t2 || null, this.udb = null, this._database = n2;
   }
@@ -18788,9 +18787,6 @@ class Kn {
     for (; e2.prevStage; )
       e2 = e2.prevStage, t2.push(e2.content);
     return { $db: t2.reverse().map((e3) => ({ $method: e3.$method, $param: qn(e3.$param) })) };
-  }
-  toString() {
-    return JSON.stringify(this.toJSON());
   }
   getAction() {
     const e2 = this.toJSON().$db.find((e3) => "action" === e3.$method);
@@ -18802,7 +18798,7 @@ class Kn {
   get isAggregate() {
     let e2 = this;
     for (; e2; ) {
-      const t2 = Mn(e2), n2 = Mn(e2.prevStage);
+      const t2 = Kn(e2), n2 = Kn(e2.prevStage);
       if ("aggregate" === t2 && "collection" === n2 || "pipeline" === t2)
         return true;
       e2 = e2.prevStage;
@@ -18812,7 +18808,7 @@ class Kn {
   get isCommand() {
     let e2 = this;
     for (; e2; ) {
-      if ("command" === Mn(e2))
+      if ("command" === Kn(e2))
         return true;
       e2 = e2.prevStage;
     }
@@ -18821,7 +18817,7 @@ class Kn {
   get isAggregateCommand() {
     let e2 = this;
     for (; e2; ) {
-      const t2 = Mn(e2), n2 = Mn(e2.prevStage);
+      const t2 = Kn(e2), n2 = Kn(e2.prevStage);
       if ("aggregate" === t2 && "command" === n2)
         return true;
       e2 = e2.prevStage;
@@ -18865,7 +18861,7 @@ class Kn {
   }
   _send(e2, t2) {
     const n2 = this.getAction(), s2 = this.getCommand();
-    if (s2.$db.push({ $method: e2, $param: qn(t2) }), b) {
+    if (s2.$db.push({ $method: e2, $param: qn(t2) }), k) {
       const e3 = s2.$db.find((e4) => "collection" === e4.$method), t3 = e3 && e3.$param;
       t3 && 1 === t3.length && "string" == typeof e3.$param[0] && e3.$param[0].indexOf(",") > -1 && console.warn("检测到使用JQL语法联表查询时，未使用getTemp先过滤主表数据，在主表数据量大的情况下可能会查询缓慢。\n- 如何优化请参考此文档：https://uniapp.dcloud.net.cn/uniCloud/jql?id=lookup-with-temp \n- 如果主表数据量很小请忽略此信息，项目发行时不会出现此提示。");
     }
@@ -18873,7 +18869,7 @@ class Kn {
   }
 }
 function jn(e2, t2, n2) {
-  return Ln(new Kn(e2, t2, n2), { get(e3, t3) {
+  return Ln(new Mn(e2, t2, n2), { get(e3, t3) {
     let s2 = "db";
     return e3 && e3.content && (s2 = e3.content.$method), Fn(s2, t3) ? jn({ $method: t3 }, e3, n2) : function() {
       return jn({ $method: t3, $param: qn(Array.from(arguments)) }, e3, n2);
@@ -18887,9 +18883,6 @@ function Bn({ path: e2, method: t2 }) {
     }
     toJSON() {
       return { $newDb: [...e2.map((e3) => ({ $method: e3 })), { $method: t2, $param: this.param }] };
-    }
-    toString() {
-      return JSON.stringify(this.toJSON());
     }
   };
 }
@@ -18942,10 +18935,10 @@ class Wn extends class {
     }
     const i2 = this, o2 = this._isJQL ? "databaseForJQL" : "database";
     function a2(e3) {
-      return i2._callback("error", [e3]), q(M(o2, "fail"), e3).then(() => q(M(o2, "complete"), e3)).then(() => (r2(null, e3), Y(B, { type: z, content: e3 }), Promise.reject(e3)));
+      return i2._callback("error", [e3]), q(K(o2, "fail"), e3).then(() => q(K(o2, "complete"), e3)).then(() => (r2(null, e3), Q(B, { type: z, content: e3 }), Promise.reject(e3)));
     }
-    const c2 = q(M(o2, "invoke")), u2 = this._uniClient;
-    return c2.then(() => u2.callFunction({ name: "DCloud-clientDB", type: l, data: { action: e2, command: t2, multiCommand: n2 } })).then((e3) => {
+    const c2 = q(K(o2, "invoke")), u2 = this._uniClient;
+    return c2.then(() => u2.callFunction({ name: "DCloud-clientDB", type: h, data: { action: e2, command: t2, multiCommand: n2 } })).then((e3) => {
       const { code: t3, message: n3, token: s3, tokenExpired: c3, systemInfo: u3 = [] } = e3.result;
       if (u3)
         for (let e4 = 0; e4 < u3.length; e4++) {
@@ -18957,20 +18950,20 @@ class Wn extends class {
       if (t3) {
         return a2(new ne({ code: t3, message: n3, requestId: e3.requestId }));
       }
-      e3.result.errCode = e3.result.errCode || e3.result.code, e3.result.errMsg = e3.result.errMsg || e3.result.message, s3 && c3 && (oe({ token: s3, tokenExpired: c3 }), this._callbackAuth("refreshToken", [{ token: s3, tokenExpired: c3 }]), this._callback("refreshToken", [{ token: s3, tokenExpired: c3 }]), Y(W, { token: s3, tokenExpired: c3 }));
-      const h2 = [{ prop: "affectedDocs", tips: "affectedDocs不再推荐使用，请使用inserted/deleted/updated/data.length替代" }, { prop: "code", tips: "code不再推荐使用，请使用errCode替代" }, { prop: "message", tips: "message不再推荐使用，请使用errMsg替代" }];
-      for (let t4 = 0; t4 < h2.length; t4++) {
-        const { prop: n4, tips: s4 } = h2[t4];
+      e3.result.errCode = e3.result.errCode || e3.result.code, e3.result.errMsg = e3.result.errMsg || e3.result.message, s3 && c3 && (oe({ token: s3, tokenExpired: c3 }), this._callbackAuth("refreshToken", [{ token: s3, tokenExpired: c3 }]), this._callback("refreshToken", [{ token: s3, tokenExpired: c3 }]), Q(W, { token: s3, tokenExpired: c3 }));
+      const l2 = [{ prop: "affectedDocs", tips: "affectedDocs不再推荐使用，请使用inserted/deleted/updated/data.length替代" }, { prop: "code", tips: "code不再推荐使用，请使用errCode替代" }, { prop: "message", tips: "message不再推荐使用，请使用errMsg替代" }];
+      for (let t4 = 0; t4 < l2.length; t4++) {
+        const { prop: n4, tips: s4 } = l2[t4];
         if (n4 in e3.result) {
           const t5 = e3.result[n4];
           Object.defineProperty(e3.result, n4, { get: () => (console.warn(s4), t5) });
         }
       }
       return function(e4) {
-        return q(M(o2, "success"), e4).then(() => q(M(o2, "complete"), e4)).then(() => {
+        return q(K(o2, "success"), e4).then(() => q(K(o2, "complete"), e4)).then(() => {
           r2(e4, null);
           const t4 = i2._parseResult(e4);
-          return Y(B, { type: z, content: t4 }), Promise.resolve(t4);
+          return Q(B, { type: z, content: t4 }), Promise.resolve(t4);
         });
       }(e3);
     }, (e3) => {
@@ -18984,13 +18977,13 @@ function Vn(e2, t2) {
   let n2 = "";
   return n2 = e2 ? `${e2}/${t2}` : t2, n2.replace(/^\//, "");
 }
-function Qn(e2 = [], t2 = "") {
+function Yn(e2 = [], t2 = "") {
   const n2 = [], s2 = [];
   return e2.forEach((e3) => {
     true === e3.needLogin ? n2.push(Vn(t2, e3.path)) : false === e3.needLogin && s2.push(Vn(t2, e3.path));
   }), { needLoginPage: n2, notNeedLoginPage: s2 };
 }
-function Yn(e2) {
+function Qn(e2) {
   return e2.split("?")[0].replace(/^\//, "");
 }
 function Xn() {
@@ -19003,26 +18996,26 @@ function Xn() {
   }());
 }
 function Zn() {
-  return Yn(Xn());
+  return Qn(Xn());
 }
 function es(e2 = "", t2 = {}) {
   if (!e2)
     return false;
   if (!(t2 && t2.list && t2.list.length))
     return false;
-  const n2 = t2.list, s2 = Yn(e2);
+  const n2 = t2.list, s2 = Qn(e2);
   return n2.some((e3) => e3.pagePath === s2);
 }
 const ts = !!t.uniIdRouter;
 const { loginPage: ns, routerNeedLogin: ss, resToLogin: rs, needLoginPage: is, notNeedLoginPage: os, loginPageInTabBar: as } = function({ pages: e2 = [], subPackages: n2 = [], uniIdRouter: s2 = {}, tabBar: r2 = {} } = t) {
-  const { loginPage: i2, needLogin: o2 = [], resToLogin: a2 = true } = s2, { needLoginPage: c2, notNeedLoginPage: u2 } = Qn(e2), { needLoginPage: h2, notNeedLoginPage: l2 } = function(e3 = []) {
+  const { loginPage: i2, needLogin: o2 = [], resToLogin: a2 = true } = s2, { needLoginPage: c2, notNeedLoginPage: u2 } = Yn(e2), { needLoginPage: l2, notNeedLoginPage: h2 } = function(e3 = []) {
     const t2 = [], n3 = [];
     return e3.forEach((e4) => {
-      const { root: s3, pages: r3 = [] } = e4, { needLoginPage: i3, notNeedLoginPage: o3 } = Qn(r3, s3);
+      const { root: s3, pages: r3 = [] } = e4, { needLoginPage: i3, notNeedLoginPage: o3 } = Yn(r3, s3);
       t2.push(...i3), n3.push(...o3);
     }), { needLoginPage: t2, notNeedLoginPage: n3 };
   }(n2);
-  return { loginPage: i2, routerNeedLogin: o2, resToLogin: a2, needLoginPage: [...c2, ...h2], notNeedLoginPage: [...u2, ...l2], loginPageInTabBar: es(i2, r2) };
+  return { loginPage: i2, routerNeedLogin: o2, resToLogin: a2, needLoginPage: [...c2, ...l2], notNeedLoginPage: [...u2, ...h2], loginPageInTabBar: es(i2, r2) };
 }();
 if (is.indexOf(ns) > -1)
   throw new Error(`Login page [${ns}] should not be "needLogin", please check your pages.json`);
@@ -19039,17 +19032,17 @@ function cs(e2) {
   return "" === i2[0] && i2.shift(), "/" + i2.join("/") + (s2 ? "?" + s2 : "");
 }
 function us(e2) {
-  const t2 = Yn(cs(e2));
+  const t2 = Qn(cs(e2));
   return !(os.indexOf(t2) > -1) && (is.indexOf(t2) > -1 || ss.some((t3) => function(e3, t4) {
     return new RegExp(t4).test(e3);
   }(e2, t3)));
 }
-function hs({ redirect: e2 }) {
-  const t2 = Yn(e2), n2 = Yn(ns);
+function ls({ redirect: e2 }) {
+  const t2 = Qn(e2), n2 = Qn(ns);
   return Zn() !== n2 && t2 !== n2;
 }
-function ls({ api: e2, redirect: t2 } = {}) {
-  if (!t2 || !hs({ redirect: t2 }))
+function hs({ api: e2, redirect: t2 } = {}) {
+  if (!t2 || !ls({ redirect: t2 }))
     return;
   const n2 = function(e3, t3) {
     return "/" !== e3.charAt(0) && (e3 = "/" + e3), t3 ? e3.indexOf("?") > -1 ? e3 + `&uniIdRedirectUrl=${encodeURIComponent(t3)}` : e3 + `?uniIdRedirectUrl=${encodeURIComponent(t3)}` : e3;
@@ -19079,7 +19072,7 @@ function ds({ url: e2 } = {}) {
     n2.uniIdRedirectUrl = e2;
     if (G($).length > 0)
       return setTimeout(() => {
-        Y($, n2);
+        Q($, n2);
       }, 0), t2.abortLoginPageJump = true, t2;
     t2.autoToLoginPage = true;
   }
@@ -19088,14 +19081,14 @@ function ds({ url: e2 } = {}) {
 function ps() {
   !function() {
     const e3 = Xn(), { abortLoginPageJump: t2, autoToLoginPage: n2 } = ds({ url: e3 });
-    t2 || n2 && ls({ api: "redirectTo", redirect: e3 });
+    t2 || n2 && hs({ api: "redirectTo", redirect: e3 });
   }();
   const e2 = ["navigateTo", "redirectTo", "reLaunch", "switchTab"];
   for (let t2 = 0; t2 < e2.length; t2++) {
     const n2 = e2[t2];
     index.addInterceptor(n2, { invoke(e3) {
       const { abortLoginPageJump: t3, autoToLoginPage: s2 } = ds({ url: e3.url });
-      return t3 ? e3 : s2 ? (ls({ api: n2, redirect: cs(e3.url) }), false) : e3;
+      return t3 ? e3 : s2 ? (hs({ api: n2, redirect: cs(e3.url) }), false) : e3;
     } });
   }
 }
@@ -19124,8 +19117,8 @@ function fs() {
       const t3 = G($);
       ee().then(() => {
         const n3 = Xn();
-        if (n3 && hs({ redirect: n3 }))
-          return t3.length > 0 ? Y($, Object.assign({ uniIdRedirectUrl: n3 }, e3)) : void (ns && ls({ api: "navigateTo", redirect: n3 }));
+        if (n3 && ls({ redirect: n3 }))
+          return t3.length > 0 ? Q($, Object.assign({ uniIdRedirectUrl: n3 }, e3)) : void (ns && hs({ api: "navigateTo", redirect: n3 }));
       });
     }(n2);
   });
@@ -19135,13 +19128,13 @@ function gs(e2) {
     e3.onResponse = function(e4) {
       V(B, e4);
     }, e3.offResponse = function(e4) {
-      Q(B, e4);
+      Y(B, e4);
     };
   }(e2), function(e3) {
     e3.onNeedLogin = function(e4) {
       V($, e4);
     }, e3.offNeedLogin = function(e4) {
-      Q($, e4);
+      Y($, e4);
     }, ts && (U("_globalUniCloudStatus").needLoginInit || (U("_globalUniCloudStatus").needLoginInit = true, ee().then(() => {
       ps.call(e3);
     }), rs && fs.call(e3)));
@@ -19149,7 +19142,7 @@ function gs(e2) {
     e3.onRefreshToken = function(e4) {
       V(W, e4);
     }, e3.offRefreshToken = function(e4) {
-      Q(W, e4);
+      Y(W, e4);
     };
   }(e2);
 }
@@ -19254,9 +19247,9 @@ var vs = s(function(e2, t2) {
       }(t3), t3);
     };
   };
-}), Is = n(vs);
-const Ss = "manual";
-function bs(e2) {
+}), Ss = n(vs);
+const bs = "manual";
+function ks(e2) {
   return { props: { localdata: { type: Array, default: () => [] }, options: { type: [Object, Array], default: () => ({}) }, spaceInfo: { type: Object, default: () => ({}) }, collection: { type: [String, Array], default: "" }, action: { type: String, default: "" }, field: { type: String, default: "" }, orderby: { type: String, default: "" }, where: { type: [String, Object], default: "" }, pageData: { type: String, default: "add" }, pageCurrent: { type: Number, default: 1 }, pageSize: { type: Number, default: 20 }, getcount: { type: [Boolean, String], default: false }, gettree: { type: [Boolean, String], default: false }, gettreepath: { type: [Boolean, String], default: false }, startwith: { type: String, default: "" }, limitlevel: { type: Number, default: 10 }, groupby: { type: String, default: "" }, groupField: { type: String, default: "" }, distinct: { type: [Boolean, String], default: false }, foreignKey: { type: String, default: "" }, loadtime: { type: String, default: "auto" }, manual: { type: Boolean, default: false } }, data: () => ({ mixinDatacomLoading: false, mixinDatacomHasMore: false, mixinDatacomResData: [], mixinDatacomErrorMessage: "", mixinDatacomPage: {} }), created() {
     this.mixinDatacomPage = { current: this.pageCurrent, size: this.pageSize, count: 0 }, this.$watch(() => {
       var e3 = [];
@@ -19264,7 +19257,7 @@ function bs(e2) {
         e3.push(this[t2]);
       }), e3;
     }, (e3, t2) => {
-      if (this.loadtime === Ss)
+      if (this.loadtime === bs)
         return;
       let n2 = false;
       const s2 = [];
@@ -19300,13 +19293,13 @@ function bs(e2) {
     const u2 = t2.groupField || this.groupField;
     u2 && (n2 = n2.groupField(u2));
     true === (void 0 !== t2.distinct ? t2.distinct : this.distinct) && (n2 = n2.distinct());
-    const h2 = t2.orderby || this.orderby;
-    h2 && (n2 = n2.orderBy(h2));
-    const l2 = void 0 !== t2.pageCurrent ? t2.pageCurrent : this.mixinDatacomPage.current, d2 = void 0 !== t2.pageSize ? t2.pageSize : this.mixinDatacomPage.size, p2 = void 0 !== t2.getcount ? t2.getcount : this.getcount, f2 = void 0 !== t2.gettree ? t2.gettree : this.gettree, g2 = void 0 !== t2.gettreepath ? t2.gettreepath : this.gettreepath, m2 = { getCount: p2 }, y2 = { limitLevel: void 0 !== t2.limitlevel ? t2.limitlevel : this.limitlevel, startWith: void 0 !== t2.startwith ? t2.startwith : this.startwith };
-    return f2 && (m2.getTree = y2), g2 && (m2.getTreePath = y2), n2 = n2.skip(d2 * (l2 - 1)).limit(d2).get(m2), n2;
+    const l2 = t2.orderby || this.orderby;
+    l2 && (n2 = n2.orderBy(l2));
+    const h2 = void 0 !== t2.pageCurrent ? t2.pageCurrent : this.mixinDatacomPage.current, d2 = void 0 !== t2.pageSize ? t2.pageSize : this.mixinDatacomPage.size, p2 = void 0 !== t2.getcount ? t2.getcount : this.getcount, f2 = void 0 !== t2.gettree ? t2.gettree : this.gettree, g2 = void 0 !== t2.gettreepath ? t2.gettreepath : this.gettreepath, m2 = { getCount: p2 }, y2 = { limitLevel: void 0 !== t2.limitlevel ? t2.limitlevel : this.limitlevel, startWith: void 0 !== t2.startwith ? t2.startwith : this.startwith };
+    return f2 && (m2.getTree = y2), g2 && (m2.getTreePath = y2), n2 = n2.skip(d2 * (h2 - 1)).limit(d2).get(m2), n2;
   } } };
 }
-function ks(e2) {
+function Is(e2) {
   return function(t2, n2 = {}) {
     n2 = function(e3, t3 = {}) {
       return e3.customUI = t3.customUI || e3.customUI, e3.parseSystemError = t3.parseSystemError || e3.parseSystemError, Object.assign(e3.loadingOptions, t3.loadingOptions), Object.assign(e3.errorOptions, t3.errorOptions), "object" == typeof t3.secretMethods && (e3.secretMethods = t3.secretMethods), e3;
@@ -19317,29 +19310,29 @@ function ks(e2) {
         const r3 = n3 ? n3({ params: s4 }) : {};
         let i3, o3;
         try {
-          return await q(M(t3, "invoke"), { ...r3 }), i3 = await e3(...s4), await q(M(t3, "success"), { ...r3, result: i3 }), i3;
+          return await q(K(t3, "invoke"), { ...r3 }), i3 = await e3(...s4), await q(K(t3, "success"), { ...r3, result: i3 }), i3;
         } catch (e4) {
-          throw o3 = e4, await q(M(t3, "fail"), { ...r3, error: o3 }), o3;
+          throw o3 = e4, await q(K(t3, "fail"), { ...r3, error: o3 }), o3;
         } finally {
-          await q(M(t3, "complete"), o3 ? { ...r3, error: o3 } : { ...r3, result: i3 });
+          await q(K(t3, "complete"), o3 ? { ...r3, error: o3 } : { ...r3, result: i3 });
         }
       };
     }({ fn: async function s4(...u2) {
-      let l2;
+      let h2;
       a2 && index.showLoading({ title: r2.title, mask: r2.mask });
-      const d2 = { name: t2, type: h, data: { method: c2, params: u2 } };
+      const d2 = { name: t2, type: l, data: { method: c2, params: u2 } };
       "object" == typeof n2.secretMethods && function(e3, t3) {
         const n3 = t3.data.method, s5 = e3.secretMethods || {}, r3 = s5[n3] || s5["*"];
         r3 && (t3.secretType = r3);
       }(n2, d2);
       let p2 = false;
       try {
-        l2 = await e2.callFunction(d2);
+        h2 = await e2.callFunction(d2);
       } catch (e3) {
-        p2 = true, l2 = { result: new ne(e3) };
+        p2 = true, h2 = { result: new ne(e3) };
       }
-      const { errSubject: f2, errCode: g2, errMsg: m2, newToken: y2 } = l2.result || {};
-      if (a2 && index.hideLoading(), y2 && y2.token && y2.tokenExpired && (oe(y2), Y(W, { ...y2 })), g2) {
+      const { errSubject: f2, errCode: g2, errMsg: m2, newToken: y2 } = h2.result || {};
+      if (a2 && index.hideLoading(), y2 && y2.token && y2.tokenExpired && (oe(y2), Q(W, { ...y2 })), g2) {
         let e3 = m2;
         if (p2 && o2) {
           e3 = (await o2({ objectName: t2, methodName: c2, params: u2, errSubject: f2, errCode: g2, errMsg: m2 })).errMsg || m2;
@@ -19364,20 +19357,20 @@ function ks(e2) {
                 return s4(...u2);
             }
           }
-        const n3 = new ne({ subject: f2, code: g2, message: m2, requestId: l2.requestId });
-        throw n3.detail = l2.result, Y(B, { type: H, content: n3 }), n3;
+        const n3 = new ne({ subject: f2, code: g2, message: m2, requestId: h2.requestId });
+        throw n3.detail = h2.result, Q(B, { type: H, content: n3 }), n3;
       }
-      return Y(B, { type: H, content: l2.result }), l2.result;
+      return Q(B, { type: H, content: h2.result }), h2.result;
     }, interceptorName: "callObject", getCallbackArgs: function({ params: e3 } = {}) {
       return { objectName: t2, methodName: c2, params: e3 };
     } }) });
   };
 }
-function Cs(e2) {
+function Ts(e2) {
   return U("_globalUniCloudSecureNetworkCache__{spaceId}".replace("{spaceId}", e2.config.spaceId));
 }
-async function Ts({ openid: e2, callLoginByWeixin: t2 = false } = {}) {
-  const n2 = Cs(this);
+async function Cs({ openid: e2, callLoginByWeixin: t2 = false } = {}) {
+  const n2 = Ts(this);
   if (e2 && t2)
     throw new Error("[SecureNetwork] openid and callLoginByWeixin cannot be passed at the same time");
   if (e2)
@@ -19391,125 +19384,16 @@ async function Ts({ openid: e2, callLoginByWeixin: t2 = false } = {}) {
   }), r2 = this.importObject("uni-id-co", { customUI: true });
   return await r2.secureNetworkHandshakeByWeixin({ code: s2, callLoginByWeixin: t2 }), n2.mpWeixinCode = s2, { code: s2 };
 }
-async function Ps(e2) {
-  const t2 = Cs(this);
-  return t2.initPromise || (t2.initPromise = Ts.call(this, e2)), t2.initPromise;
+async function As(e2) {
+  const t2 = Ts(this);
+  return t2.initPromise || (t2.initPromise = Cs.call(this, e2)), t2.initPromise;
 }
-function As(e2) {
+function Ps(e2) {
   return function({ openid: t2, callLoginByWeixin: n2 = false } = {}) {
-    return Ps.call(e2, { openid: t2, callLoginByWeixin: n2 });
+    return As.call(e2, { openid: t2, callLoginByWeixin: n2 });
   };
 }
-function Es(e2) {
-  const t2 = { getSystemInfo: index.getSystemInfo, getPushClientId: index.getPushClientId };
-  return function(n2) {
-    return new Promise((s2, r2) => {
-      t2[e2]({ ...n2, success(e3) {
-        s2(e3);
-      }, fail(e3) {
-        r2(e3);
-      } });
-    });
-  };
-}
-class Os extends class {
-  constructor() {
-    this._callback = {};
-  }
-  addListener(e2, t2) {
-    this._callback[e2] || (this._callback[e2] = []), this._callback[e2].push(t2);
-  }
-  on(e2, t2) {
-    return this.addListener(e2, t2);
-  }
-  removeListener(e2, t2) {
-    if (!t2)
-      throw new Error('The "listener" argument must be of type function. Received undefined');
-    const n2 = this._callback[e2];
-    if (!n2)
-      return;
-    const s2 = function(e3, t3) {
-      for (let n3 = e3.length - 1; n3 >= 0; n3--)
-        if (e3[n3] === t3)
-          return n3;
-      return -1;
-    }(n2, t2);
-    n2.splice(s2, 1);
-  }
-  off(e2, t2) {
-    return this.removeListener(e2, t2);
-  }
-  removeAllListener(e2) {
-    delete this._callback[e2];
-  }
-  emit(e2, ...t2) {
-    const n2 = this._callback[e2];
-    if (n2)
-      for (let e3 = 0; e3 < n2.length; e3++)
-        n2[e3](...t2);
-  }
-} {
-  constructor() {
-    super(), this._uniPushMessageCallback = this._receivePushMessage.bind(this), this._currentMessageId = -1, this._payloadQueue = [];
-  }
-  init() {
-    return Promise.all([Es("getSystemInfo")(), Es("getPushClientId")()]).then(([{ appId: e2 } = {}, { cid: t2 } = {}] = []) => {
-      if (!e2)
-        throw new Error("Invalid appId, please check the manifest.json file");
-      if (!t2)
-        throw new Error("Invalid push client id");
-      this._appId = e2, this._pushClientId = t2, this._seqId = Date.now() + "-" + Math.floor(9e5 * Math.random() + 1e5), this.emit("open"), this._initMessageListener();
-    }, (e2) => {
-      throw this.emit("error", e2), this.close(), e2;
-    });
-  }
-  async open() {
-    return this.init();
-  }
-  _isUniCloudSSE(e2) {
-    if ("receive" !== e2.type)
-      return false;
-    const t2 = e2 && e2.data && e2.data.payload;
-    return !(!t2 || "UNI_CLOUD_SSE" !== t2.channel || t2.seqId !== this._seqId);
-  }
-  _receivePushMessage(e2) {
-    if (!this._isUniCloudSSE(e2))
-      return;
-    const t2 = e2 && e2.data && e2.data.payload, { action: n2, messageId: s2, message: r2 } = t2;
-    this._payloadQueue.push({ action: n2, messageId: s2, message: r2 }), this._consumMessage();
-  }
-  _consumMessage() {
-    for (; ; ) {
-      const e2 = this._payloadQueue.find((e3) => e3.messageId === this._currentMessageId + 1);
-      if (!e2)
-        break;
-      this._currentMessageId++, this._parseMessagePayload(e2);
-    }
-  }
-  _parseMessagePayload(e2) {
-    const { action: t2, messageId: n2, message: s2 } = e2;
-    "end" === t2 ? this._end({ messageId: n2, message: s2 }) : "message" === t2 && this._appendMessage({ messageId: n2, message: s2 });
-  }
-  _appendMessage({ messageId: e2, message: t2 } = {}) {
-    this.emit("message", t2);
-  }
-  _end({ messageId: e2, message: t2 } = {}) {
-    this.emit("end", t2), this.close();
-  }
-  _initMessageListener() {
-    index.onPushMessage(this._uniPushMessageCallback);
-  }
-  _destroy() {
-    index.offPushMessage(this._uniPushMessageCallback);
-  }
-  toJSON() {
-    return { appId: this._appId, pushClientId: this._pushClientId, seqId: this._seqId };
-  }
-  close() {
-    this._destroy(), this.emit("close");
-  }
-}
-async function xs(e2, t2) {
+async function Es(e2, t2) {
   const n2 = `http://${e2}:${t2}/system/ping`;
   try {
     const e3 = await (s2 = { url: n2, timeout: 500 }, new Promise((e4, t3) => {
@@ -19525,7 +19409,7 @@ async function xs(e2, t2) {
   }
   var s2;
 }
-async function Rs(e2) {
+async function Os(e2) {
   const t2 = e2.__dev__;
   if (!t2.debugInfo)
     return;
@@ -19533,7 +19417,7 @@ async function Rs(e2) {
     let n3;
     for (let s3 = 0; s3 < e3.length; s3++) {
       const r3 = e3[s3];
-      if (await xs(r3, t3)) {
+      if (await Es(r3, t3)) {
         n3 = r3;
         break;
       }
@@ -19544,12 +19428,12 @@ async function Rs(e2) {
     return t2.localAddress = r2, void (t2.localPort = s2);
   const i2 = console["warn"];
   let o2 = "";
-  if ("remote" === t2.debugInfo.initialLaunchType ? (t2.debugInfo.forceRemote = true, o2 = "当前客户端和HBuilderX不在同一局域网下（或其他网络原因无法连接HBuilderX），uniCloud本地调试服务不对当前客户端生效。\n- 如果不使用uniCloud本地调试服务，请直接忽略此信息。\n- 如需使用uniCloud本地调试服务，请将客户端与主机连接到同一局域网下并重新运行到客户端。") : o2 = "无法连接uniCloud本地调试服务，请检查当前客户端是否与主机在同一局域网下。\n- 如需使用uniCloud本地调试服务，请将客户端与主机连接到同一局域网下并重新运行到客户端。", o2 += "\n- 如果在HBuilderX开启的状态下切换过网络环境，请重启HBuilderX后再试\n- 检查系统防火墙是否拦截了HBuilderX自带的nodejs\n- 检查是否错误的使用拦截器修改uni.request方法的参数", 0 === P.indexOf("mp-") && (o2 += "\n- 小程序中如何使用uniCloud，请参考：https://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp"), !t2.debugInfo.forceRemote)
+  if ("remote" === t2.debugInfo.initialLaunchType ? (t2.debugInfo.forceRemote = true, o2 = "当前客户端和HBuilderX不在同一局域网下（或其他网络原因无法连接HBuilderX），uniCloud本地调试服务不对当前客户端生效。\n- 如果不使用uniCloud本地调试服务，请直接忽略此信息。\n- 如需使用uniCloud本地调试服务，请将客户端与主机连接到同一局域网下并重新运行到客户端。") : o2 = "无法连接uniCloud本地调试服务，请检查当前客户端是否与主机在同一局域网下。\n- 如需使用uniCloud本地调试服务，请将客户端与主机连接到同一局域网下并重新运行到客户端。", o2 += "\n- 如果在HBuilderX开启的状态下切换过网络环境，请重启HBuilderX后再试\n- 检查系统防火墙是否拦截了HBuilderX自带的nodejs\n- 检查是否错误的使用拦截器修改uni.request方法的参数", 0 === A.indexOf("mp-") && (o2 += "\n- 小程序中如何使用uniCloud，请参考：https://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp"), !t2.debugInfo.forceRemote)
     throw new Error(o2);
   i2(o2);
 }
-function Us(e2) {
-  e2._initPromiseHub || (e2._initPromiseHub = new I({ createPromise: function() {
+function xs(e2) {
+  e2._initPromiseHub || (e2._initPromiseHub = new S({ createPromise: function() {
     let t2 = Promise.resolve();
     var n2;
     n2 = 1, t2 = new Promise((e3) => {
@@ -19561,25 +19445,25 @@ function Us(e2) {
     return t2.then(() => s2.getLoginState()).then((e3) => e3 ? Promise.resolve() : s2.signInAnonymously());
   } }));
 }
-const Ls = { tcb: St, tencent: St, aliyun: me, private: kt };
-let Ns = new class {
+const Rs = { tcb: bt, tencent: bt, aliyun: me, private: It };
+let Us = new class {
   init(e2) {
     let t2 = {};
-    const n2 = Ls[e2.provider];
+    const n2 = Rs[e2.provider];
     if (!n2)
       throw new Error("未提供正确的provider参数");
     t2 = n2.init(e2), function(e3) {
       const t3 = {};
-      e3.__dev__ = t3, t3.debugLog = "app" === P;
-      const n3 = A;
+      e3.__dev__ = t3, t3.debugLog = "app" === A;
+      const n3 = P;
       n3 && !n3.code && (t3.debugInfo = n3);
-      const s2 = new I({ createPromise: function() {
-        return Rs(e3);
+      const s2 = new S({ createPromise: function() {
+        return Os(e3);
       } });
       t3.initLocalNetwork = function() {
         return s2.exec();
       };
-    }(t2), Us(t2), Rn(t2), function(e3) {
+    }(t2), xs(t2), Rn(t2), function(e3) {
       const t3 = e3.uploadFile;
       e3.uploadFile = function(e4) {
         return t3.call(this, e4);
@@ -19601,9 +19485,9 @@ let Ns = new class {
         return this._databaseForJQL = n3, n3;
       };
     }(t2), function(e3) {
-      e3.getCurrentUserInfo = ws, e3.chooseAndUploadFile = Is.initChooseAndUploadFile(e3), Object.assign(e3, { get mixinDatacom() {
-        return bs(e3);
-      } }), e3.SSEChannel = Os, e3.initSecureNetworkByWeixin = As(e3), e3.importObject = ks(e3);
+      e3.getCurrentUserInfo = ws, e3.chooseAndUploadFile = Ss.initChooseAndUploadFile(e3), Object.assign(e3, { get mixinDatacom() {
+        return ks(e3);
+      } }), e3.importObject = Is(e3), e3.initSecureNetworkByWeixin = Ps(e3);
     }(t2);
     return ["callFunction", "uploadFile", "deleteFile", "getTempFileURL", "downloadFile", "chooseAndUploadFile"].forEach((e3) => {
       if (!t2[e3])
@@ -19620,13 +19504,13 @@ let Ns = new class {
           }
           const r2 = "callFunction" === t3 && !s2, i2 = this._initPromiseHub.exec();
           n4 = n4 || {};
-          const { success: o2, fail: a2, complete: c2 } = te(n4), h2 = i2.then(() => s2 ? Promise.resolve() : q(M(t3, "invoke"), n4)).then(() => e4.call(this, n4)).then((e5) => s2 ? Promise.resolve(e5) : q(M(t3, "success"), e5).then(() => q(M(t3, "complete"), e5)).then(() => (r2 && Y(B, { type: J, content: e5 }), Promise.resolve(e5))), (e5) => s2 ? Promise.reject(e5) : q(M(t3, "fail"), e5).then(() => q(M(t3, "complete"), e5)).then(() => (Y(B, { type: J, content: e5 }), Promise.reject(e5))));
+          const { success: o2, fail: a2, complete: c2 } = te(n4), l2 = i2.then(() => s2 ? Promise.resolve() : q(K(t3, "invoke"), n4)).then(() => e4.call(this, n4)).then((e5) => s2 ? Promise.resolve(e5) : q(K(t3, "success"), e5).then(() => q(K(t3, "complete"), e5)).then(() => (r2 && Q(B, { type: J, content: e5 }), Promise.resolve(e5))), (e5) => s2 ? Promise.reject(e5) : q(K(t3, "fail"), e5).then(() => q(K(t3, "complete"), e5)).then(() => (Q(B, { type: J, content: e5 }), Promise.reject(e5))));
           if (!(o2 || a2 || c2))
-            return h2;
-          h2.then((e5) => {
-            o2 && o2(e5), c2 && c2(e5), r2 && Y(B, { type: J, content: e5 });
+            return l2;
+          l2.then((e5) => {
+            o2 && o2(e5), c2 && c2(e5), r2 && Q(B, { type: J, content: e5 });
           }, (e5) => {
-            a2 && a2(e5), c2 && c2(e5), r2 && Y(B, { type: J, content: e5 });
+            a2 && a2(e5), c2 && c2(e5), r2 && Q(B, { type: J, content: e5 });
           });
         };
       }(t2[e3], e3).bind(t2);
@@ -19637,21 +19521,21 @@ let Ns = new class {
   const e2 = E;
   let t2 = {};
   if (e2 && 1 === e2.length)
-    t2 = e2[0], Ns = Ns.init(t2), Ns._isDefault = true;
+    t2 = e2[0], Us = Us.init(t2), Us._isDefault = true;
   else {
     const t3 = ["auth", "callFunction", "uploadFile", "deleteFile", "getTempFileURL", "downloadFile", "database", "getCurrentUSerInfo", "importObject"];
     let n2;
     n2 = e2 && e2.length > 0 ? "应用有多个服务空间，请通过uniCloud.init方法指定要使用的服务空间" : "应用未关联服务空间，请在uniCloud目录右键关联服务空间", t3.forEach((e3) => {
-      Ns[e3] = function() {
+      Us[e3] = function() {
         return console.error(n2), Promise.reject(new ne({ code: "SYS_ERR", message: n2 }));
       };
     });
   }
-  Object.assign(Ns, { get mixinDatacom() {
-    return bs(Ns);
-  } }), gs(Ns), Ns.addInterceptor = D, Ns.removeInterceptor = F, Ns.interceptObject = K;
+  Object.assign(Us, { get mixinDatacom() {
+    return ks(Us);
+  } }), gs(Us), Us.addInterceptor = D, Us.removeInterceptor = F, Us.interceptObject = M;
 })();
-var Ds = Ns;
+var Ls = Us;
 const ERR_MSG_OK = "chooseAndUploadFile:ok";
 const ERR_MSG_FAIL = "chooseAndUploadFile:fail";
 function chooseImage(opts) {
@@ -19791,7 +19675,7 @@ function uploadCloudFiles(files, max = 5, onUploadProgress) {
       const index2 = self2.files.findIndex((v2) => v2.uuid === fileItem.uuid);
       fileItem.url = "";
       delete fileItem.errMsg;
-      Ds.uploadFile({
+      Ls.uploadFile({
         filePath: fileItem.path,
         cloudPath: fileItem.cloudPath,
         fileType: fileItem.fileType,
@@ -21216,7 +21100,7 @@ function createAnimation(option, _this) {
   clearTimeout(_this.timer);
   return new MPAnimation(option, _this);
 }
-exports.Ds = Ds;
+exports.Ls = Ls;
 exports.SchemaValidator = SchemaValidator;
 exports._export_sfc = _export_sfc;
 exports.chooseAndUploadFile = chooseAndUploadFile;

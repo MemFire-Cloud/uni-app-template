@@ -237,16 +237,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     f: common_vendor.f($data.fileList, (item, index, i0) => {
       return {
         a: common_vendor.t(item.name),
-        b: "68f9a494-7-" + i0 + "," + ("68f9a494-6-" + i0),
+        b: "a0e9a77a-7-" + i0 + "," + ("a0e9a77a-6-" + i0),
         c: common_vendor.t(item.size),
-        d: "68f9a494-8-" + i0 + "," + ("68f9a494-6-" + i0),
+        d: "a0e9a77a-8-" + i0 + "," + ("a0e9a77a-6-" + i0),
         e: common_vendor.t(item.created_at),
-        f: "68f9a494-9-" + i0 + "," + ("68f9a494-6-" + i0),
+        f: "a0e9a77a-9-" + i0 + "," + ("a0e9a77a-6-" + i0),
         g: common_vendor.o(($event) => $options.downloadFile(item.name), index),
         h: common_vendor.o(($event) => $options.removeFile(item.name), index),
-        i: "68f9a494-10-" + i0 + "," + ("68f9a494-6-" + i0),
+        i: "a0e9a77a-10-" + i0 + "," + ("a0e9a77a-6-" + i0),
         j: index,
-        k: "68f9a494-6-" + i0 + ",68f9a494-0"
+        k: "a0e9a77a-6-" + i0 + ",a0e9a77a-0"
       };
     }),
     g: common_vendor.p({
@@ -255,7 +255,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: common_vendor.p({
       align: "center"
     }),
-    i: common_vendor.sr("table", "68f9a494-0"),
+    i: common_vendor.sr("table", "a0e9a77a-0"),
     j: common_vendor.p({
       loading: _ctx.loading,
       border: true,
@@ -269,5 +269,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/pages/filestorage/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/filestorage/index.vue"]]);
 wx.createPage(MiniProgramPage);

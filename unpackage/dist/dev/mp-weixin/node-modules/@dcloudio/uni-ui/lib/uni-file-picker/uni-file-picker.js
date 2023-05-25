@@ -147,9 +147,9 @@ const _sfc_main = {
     }
   },
   created() {
-    if (!(common_vendor.Ds.config && common_vendor.Ds.config.provider)) {
+    if (!(common_vendor.Ls.config && common_vendor.Ls.config.provider)) {
       this.noSpace = true;
-      common_vendor.Ds.chooseAndUploadFile = common_vendor.chooseAndUploadFile;
+      common_vendor.Ls.chooseAndUploadFile = common_vendor.chooseAndUploadFile;
     }
     this.form = this.getForm("uniForms");
     this.formItem = this.getForm("uniFormsItem");
@@ -249,7 +249,7 @@ const _sfc_main = {
      */
     chooseFiles() {
       const _extname = common_vendor.get_extname(this.fileExtname);
-      common_vendor.Ds.chooseAndUploadFile({
+      common_vendor.Ls.chooseAndUploadFile({
         type: this.fileMediatype,
         compressed: false,
         sizeType: this.sizeType,
@@ -465,7 +465,7 @@ const _sfc_main = {
       fileList = {
         fileList: [].concat(fileList)
       };
-      const urls = await common_vendor.Ds.getTempFileURL(fileList);
+      const urls = await common_vendor.Ls.getTempFileURL(fileList);
       return urls.fileList[0].tempFileURL || "";
     },
     /**
@@ -525,5 +525,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   } : {});
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/node_modules/@dcloudio/uni-ui/lib/uni-file-picker/uni-file-picker.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/node_modules/@dcloudio/uni-ui/lib/uni-file-picker/uni-file-picker.vue"]]);
 wx.createComponent(Component);

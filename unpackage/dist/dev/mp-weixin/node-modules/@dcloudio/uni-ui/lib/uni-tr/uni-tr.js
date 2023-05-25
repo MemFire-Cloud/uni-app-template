@@ -105,5 +105,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     d: $data.border ? 1 : ""
   } : {});
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/node_modules/@dcloudio/uni-ui/lib/uni-tr/uni-tr.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/node_modules/@dcloudio/uni-ui/lib/uni-tr/uni-tr.vue"]]);
 wx.createComponent(Component);

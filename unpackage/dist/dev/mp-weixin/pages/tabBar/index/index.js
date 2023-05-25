@@ -1,37 +1,49 @@
 "use strict";
 const common_vendor = require("../../../common/vendor.js");
+const lib_supabaseClient = require("../../../lib/supabaseClient.js");
 const _sfc_main = {
-  onLoad: function(option) {
+  onShow: async function() {
+    const {
+      data: {
+        session
+      },
+      error
+    } = await lib_supabaseClient.supabase.auth.getSession();
+    if (!session || error) {
+      common_vendor.index.redirectTo({
+        url: "/pages/login/index"
+      });
+    }
+  },
+  methods: {
+    tabLink(tab) {
+      if (tab === "todolist") {
+        common_vendor.index.navigateTo({
+          url: "/pages/todo/index"
+        });
+      } else if (tab === "messages") {
+        common_vendor.index.navigateTo({
+          url: "/pages/messages/index"
+        });
+      } else if (tab === "filestorage") {
+        common_vendor.index.navigateTo({
+          url: "/pages/filestorage/index"
+        });
+      } else {
+        common_vendor.index.navigateTo({
+          url: "/pages/login/index"
+        });
+      }
+    }
   }
 };
-if (!Array) {
-  const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
-  const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
-  (_easycom_uni_list_item2 + _easycom_uni_list2)();
-}
-const _easycom_uni_list_item = () => "../../../node-modules/@dcloudio/uni-ui/lib/uni-list-item/uni-list-item.js";
-const _easycom_uni_list = () => "../../../node-modules/@dcloudio/uni-ui/lib/uni-list/uni-list.js";
-if (!Math) {
-  (_easycom_uni_list_item + _easycom_uni_list)();
-}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.p({
-      title: "todoList",
-      link: true,
-      to: "/pages/todo/index"
-    }),
-    b: common_vendor.p({
-      title: "网盘",
-      link: "reLaunch",
-      to: "/pages/filestorage/index"
-    }),
-    c: common_vendor.p({
-      title: "聊天室",
-      link: "reLaunch",
-      to: "/pages/messages/index"
-    })
+    a: common_vendor.o(($event) => $options.tabLink("messages")),
+    b: common_vendor.o(($event) => $options.tabLink("filestorage")),
+    c: common_vendor.o(($event) => $options.tabLink("login")),
+    d: common_vendor.o(($event) => $options.tabLink("todolist"))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/pages/tabBar/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/tabBar/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

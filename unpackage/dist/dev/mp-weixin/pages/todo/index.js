@@ -1,7 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-require("../../lib/supabaseClient.js");
 const pages_todo_api = require("./api.js");
+require("../../lib/supabaseClient.js");
 const _sfc_main = {
   data() {
     return {
@@ -103,8 +103,6 @@ const _sfc_main = {
       this.end = e.current * 10 - 1;
       this.getTodoList(e.current * 10 - 10, e.current * 10 - 1);
     },
-    getData() {
-    },
     addItem() {
       this.formData = {};
       this.todo_id = null;
@@ -190,20 +188,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.f($data.todoList, (item, index, i0) => {
       return {
         a: common_vendor.t(item.todo),
-        b: "a528c0f6-6-" + i0 + "," + ("a528c0f6-5-" + i0),
+        b: "19453598-6-" + i0 + "," + ("19453598-5-" + i0),
         c: common_vendor.t(item.completed ? "完成" : "未完成"),
-        d: "a528c0f6-7-" + i0 + "," + ("a528c0f6-5-" + i0),
+        d: "19453598-7-" + i0 + "," + ("19453598-5-" + i0),
         e: common_vendor.o(($event) => $options.updateItem(item), index),
         f: common_vendor.o(($event) => $options.deleteItem(item.id), index),
-        g: "a528c0f6-8-" + i0 + "," + ("a528c0f6-5-" + i0),
+        g: "19453598-8-" + i0 + "," + ("19453598-5-" + i0),
         h: index,
-        i: "a528c0f6-5-" + i0 + ",a528c0f6-0"
+        i: "19453598-5-" + i0 + ",19453598-0"
       };
     }),
     h: common_vendor.p({
       align: "center"
     }),
-    i: common_vendor.sr("table", "a528c0f6-0"),
+    i: common_vendor.sr("table", "19453598-0"),
     j: common_vendor.p({
       loading: $data.loading,
       border: true,
@@ -246,11 +244,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       duration: 2e3,
       ["before-close"]: true
     }),
-    y: common_vendor.sr("popup", "a528c0f6-10"),
+    y: common_vendor.sr("popup", "19453598-10"),
     z: common_vendor.p({
       type: "dialog"
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/pages/todo/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/todo/index.vue"]]);
 wx.createPage(MiniProgramPage);

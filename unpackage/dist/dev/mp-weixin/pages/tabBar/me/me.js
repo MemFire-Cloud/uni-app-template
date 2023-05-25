@@ -41,6 +41,11 @@ const _sfc_main = {
         });
       }
     },
+    goUserInfo() {
+      common_vendor.index.navigateTo({
+        url: "/pages/userinfo/index"
+      });
+    },
     async setUserInfo(userInfo) {
       if (userInfo != null) {
         if (userInfo.avatar) {
@@ -68,16 +73,6 @@ const _sfc_main = {
     }
   }
 };
-if (!Array) {
-  const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
-  const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
-  (_easycom_uni_list_item2 + _easycom_uni_list2)();
-}
-const _easycom_uni_list_item = () => "../../../node-modules/@dcloudio/uni-ui/lib/uni-list-item/uni-list-item.js";
-const _easycom_uni_list = () => "../../../node-modules/@dcloudio/uni-ui/lib/uni-list/uni-list.js";
-if (!Math) {
-  (_easycom_uni_list_item + _easycom_uni_list)();
-}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   var _a, _b;
   return common_vendor.e({
@@ -86,21 +81,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: $data.userInfo.avatar ? $data.userInfo.avatar : "../../../static/avatar.png",
     c: common_vendor.t(((_a = $data.userInfo) == null ? void 0 : _a.username) ? (_b = $data.userInfo) == null ? void 0 : _b.username : "微信用户")
   }, {
-    d: common_vendor.p({
-      ["show-extra-icon"]: true,
-      ["extra-icon"]: $data.extraIcon_user,
-      title: "完善信息",
-      link: true,
-      to: "/pages/userinfo/index"
-    }),
-    e: common_vendor.o(($event) => $options.loginOut($event)),
-    f: common_vendor.p({
-      ["show-extra-icon"]: true,
-      extraIcon: $data.extraIcon_out,
-      title: "退出登录",
-      link: true
-    })
-  });
+    d: $data.hasUserInfo
+  }, $data.hasUserInfo ? {
+    e: common_vendor.o((...args) => $options.goUserInfo && $options.goUserInfo(...args)),
+    f: common_vendor.o((...args) => $options.loginOut && $options.loginOut(...args))
+  } : {});
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/pages/tabBar/me/me.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/tabBar/me/me.vue"]]);
 wx.createPage(MiniProgramPage);

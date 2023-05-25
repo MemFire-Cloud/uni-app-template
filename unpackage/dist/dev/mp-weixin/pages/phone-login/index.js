@@ -71,8 +71,8 @@ const _sfc_main = {
             title: "登录成功,前往修改个人信息页面",
             duration: 1500
           });
-          common_vendor.index.switchTab({
-            url: "/pages/tabBar/userinfo/index"
+          common_vendor.index.navigateTo({
+            url: "/pages/userinfo/index"
           });
         } else {
           common_vendor.index.showToast({
@@ -101,5 +101,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     j: common_vendor.o((...args) => $options.submit && $options.submit(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/pages/phone-login/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/phone-login/index.vue"]]);
 wx.createPage(MiniProgramPage);

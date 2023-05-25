@@ -141,5 +141,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     m: common_vendor.o((...args) => $options.onOk && $options.onOk(...args))
   });
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/node_modules/@dcloudio/uni-ui/lib/uni-popup-dialog/uni-popup-dialog.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/node_modules/@dcloudio/uni-ui/lib/uni-popup-dialog/uni-popup-dialog.vue"]]);
 wx.createComponent(Component);

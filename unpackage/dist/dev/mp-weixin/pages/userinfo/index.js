@@ -4,11 +4,10 @@ const lib_supabaseClient = require("../../lib/supabaseClient.js");
 const utils_commonApi = require("../../utils/commonApi.js");
 const _sfc_main = {
   data() {
-    var _a, _b, _c;
     return {
-      username: ((_a = getApp().globalData.userInfo) == null ? void 0 : _a.user_metadata.username) ? getApp().globalData.userInfo.user_metadata.username : "",
-      avatar: ((_b = getApp().globalData.userInfo) == null ? void 0 : _b.user_metadata.avatar) ? getApp().globalData.userInfo.user_metadata.avatar : "",
-      introduction: ((_c = getApp().globalData.userInfo) == null ? void 0 : _c.user_metadata.introduction) ? getApp().globalData.userInfo.user_metadata.introduction : "",
+      username: "",
+      avatar: "",
+      introduction: "",
       filePath: ""
     };
   },
@@ -91,5 +90,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: common_vendor.o((...args) => $options.submit && $options.submit(...args))
   });
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uni-app/test/pages/userinfo/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/userinfo/index.vue"]]);
 wx.createPage(MiniProgramPage);
