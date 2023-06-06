@@ -1,0 +1,1 @@
+<view class="section"><block wx:if="{{r0}}"><textarea placeholder="请输入内容" auto-focus value="{{a}}" bindinput="{{b}}"/></block><button class="add-btn" bindtap="{{c}}">确定</button></view>

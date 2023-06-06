@@ -12,13 +12,11 @@ export const FetchTodo = async () => {
         }
 }
 // 分页查询
-export const FetchPage = async (start, end) => {
+export const FetchPage = async () => {
         const { data:{data}, error } = await supabase
             .from('todo_list')
             .select('*')
             .order('created_at', { ascending: false })
-            .range(start, end)
-            .limit(10);
         if (error) {
             throw error.message || error.error_description
         } else {

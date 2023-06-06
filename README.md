@@ -65,3 +65,6 @@ update storage.buckets set public=true where id='avatars';
 
 4.执行 npm install
 
+5.在HBuilder里设置可以运行到微信小程序开发工具的配置。
+
+6.运行->运行到小程序模拟器

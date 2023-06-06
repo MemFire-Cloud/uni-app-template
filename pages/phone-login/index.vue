@@ -1,6 +1,6 @@
 <template>
 <view class="container">
-    <form>
+    <form class="from-content">
 		<view class="inputView">
 		<input class="inputText"  placeholder="请输入手机号" name="phone" v-model="phone" />
     </view>

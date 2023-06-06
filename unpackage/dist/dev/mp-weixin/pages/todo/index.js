@@ -7,31 +7,19 @@ const _sfc_main = {
     return {
       searchVal: "",
       todoList: [],
-      // 每页数据量
-      pageSize: 10,
-      // 当前页
-      pageCurrent: 1,
-      // 数据总量
-      total: 0,
-      loading: false,
-      showModal: false,
-      completeCheck: false,
       user_id: null,
       todo_id: null,
-      start: 0,
-      end: 9,
       formData: {}
     };
   },
   // 获取列表
   onLoad: function(options) {
-    this.getTodoList(this.start, this.end);
-    this.allCount();
+    this.getTodoList();
   },
   methods: {
     deleteItem(id) {
       pages_todo_api.DeleteTodo(id).then((res) => {
-        this.getTodoList(this.start, this.end);
+        this.getTodoList();
         common_vendor.index.showToast({
           title: "删除成功！",
           icon: "none",
@@ -45,32 +33,22 @@ const _sfc_main = {
         });
       });
     },
-    updateItem(item) {
-      this.formData.todo = item.todo;
-      this.formData.completed = item.completed;
-      this.todo_id = item.id;
-      this.$refs.popup.open();
+    addItem() {
+      common_vendor.index.navigateTo({
+        url: "/pages/addTodo/index"
+      });
     },
-    /**
-     * 点击取消按钮触发
-     * @param {Object} done
-     */
-    close() {
-      this.$refs.popup.close();
+    onOpenTodo(id) {
+      common_vendor.index.navigateTo({
+        url: "/pages/addTodo/index?id=" + id
+      });
     },
-    confirm() {
-      if (!this.todo_id) {
-        pages_todo_api.AddTodo({
-          user_id: getApp().globalData.userInfo.id,
-          ...this.formData
-        }).then((res) => {
-          this.getTodoList(this.start, this.end);
-          this.$refs.popup.close();
-          common_vendor.index.showToast({
-            title: "添加成功！",
-            icon: "none",
-            duration: 2e3
-          });
+    radioChange(id, type) {
+      if (type === "completed") {
+        pages_todo_api.UpdateTodo({
+          completed: true
+        }, id).then((res) => {
+          this.getTodoList();
         }).catch((err) => {
           common_vendor.index.showToast({
             title: err,
@@ -78,15 +56,11 @@ const _sfc_main = {
             duration: 2e3
           });
         });
-      } else if (this.todo_id) {
-        pages_todo_api.UpdateTodo(this.formData, this.todo_id).then((res) => {
-          this.getTodoList(this.start, this.end);
-          this.$refs.popup.close();
-          common_vendor.index.showToast({
-            title: "修改成功！",
-            icon: "none",
-            duration: 2e3
-          });
+      } else if (type === "nocCompleted") {
+        pages_todo_api.UpdateTodo({
+          completed: false
+        }, id).then((res) => {
+          this.getTodoList();
         }).catch((err) => {
           common_vendor.index.showToast({
             title: err,
@@ -96,34 +70,10 @@ const _sfc_main = {
         });
       }
     },
-    // 分页触发
-    change(e) {
-      this.$refs.table.clearSelection();
-      this.start = e.current * 10 - 10;
-      this.end = e.current * 10 - 1;
-      this.getTodoList(e.current * 10 - 10, e.current * 10 - 1);
-    },
-    addItem() {
-      this.formData = {};
-      this.todo_id = null;
-      this.$refs.popup.open();
-    },
     // 获取数据
-    getTodoList(start, end) {
-      pages_todo_api.FetchPage(start, end).then((res) => {
+    getTodoList() {
+      pages_todo_api.FetchPage().then((res) => {
         this.todoList = res;
-        this.allCount();
-      }).catch((err) => {
-        common_vendor.index.showToast({
-          title: err,
-          icon: "none",
-          duration: 2e3
-        });
-      });
-    },
-    allCount() {
-      pages_todo_api.FetchTodo().then((res) => {
-        this.total = res;
       }).catch((err) => {
         common_vendor.index.showToast({
           title: err,
@@ -146,109 +96,67 @@ const _sfc_main = {
   }
 };
 if (!Array) {
-  const _easycom_uni_th2 = common_vendor.resolveComponent("uni-th");
-  const _easycom_uni_tr2 = common_vendor.resolveComponent("uni-tr");
-  const _easycom_uni_td2 = common_vendor.resolveComponent("uni-td");
-  const _easycom_uni_table2 = common_vendor.resolveComponent("uni-table");
-  const _easycom_uni_pagination2 = common_vendor.resolveComponent("uni-pagination");
-  const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
-  const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
-  const _easycom_uni_forms2 = common_vendor.resolveComponent("uni-forms");
-  const _easycom_uni_popup_dialog2 = common_vendor.resolveComponent("uni-popup-dialog");
-  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
-  (_easycom_uni_th2 + _easycom_uni_tr2 + _easycom_uni_td2 + _easycom_uni_table2 + _easycom_uni_pagination2 + _easycom_uni_easyinput2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_popup_dialog2 + _easycom_uni_popup2)();
+  const _easycom_uni_search_bar2 = common_vendor.resolveComponent("uni-search-bar");
+  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
+  const _easycom_uni_swipe_action_item2 = common_vendor.resolveComponent("uni-swipe-action-item");
+  (_easycom_uni_search_bar2 + _easycom_uni_icons2 + _easycom_uni_swipe_action_item2)();
 }
-const _easycom_uni_th = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-th/uni-th.js";
-const _easycom_uni_tr = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-tr/uni-tr.js";
-const _easycom_uni_td = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-td/uni-td.js";
-const _easycom_uni_table = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-table/uni-table.js";
-const _easycom_uni_pagination = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-pagination/uni-pagination.js";
-const _easycom_uni_easyinput = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.js";
-const _easycom_uni_forms_item = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.js";
-const _easycom_uni_forms = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-forms/uni-forms.js";
-const _easycom_uni_popup_dialog = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-popup-dialog/uni-popup-dialog.js";
-const _easycom_uni_popup = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup.js";
+const _easycom_uni_search_bar = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-search-bar/uni-search-bar.js";
+const _easycom_uni_icons = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons.js";
+const _easycom_uni_swipe_action_item = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-swipe-action-item/uni-swipe-action-item.js";
 if (!Math) {
-  (_easycom_uni_th + _easycom_uni_tr + _easycom_uni_td + _easycom_uni_table + _easycom_uni_pagination + _easycom_uni_easyinput + _easycom_uni_forms_item + _easycom_uni_forms + _easycom_uni_popup_dialog + _easycom_uni_popup)();
+  (_easycom_uni_search_bar + _easycom_uni_icons + _easycom_uni_swipe_action_item)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.o((...args) => $options.handerSearch && $options.handerSearch(...args)),
-    b: $data.searchVal,
-    c: common_vendor.o(($event) => $data.searchVal = $event.detail.value),
-    d: common_vendor.p({
-      align: "center"
+    a: common_vendor.o($options.handerSearch),
+    b: common_vendor.o(($event) => $data.searchVal = $event),
+    c: common_vendor.p({
+      modelValue: $data.searchVal
     }),
-    e: common_vendor.p({
-      align: "center"
+    d: common_vendor.f($data.todoList, (item, index, i0) => {
+      return common_vendor.e({
+        a: !item.completed
+      }, !item.completed ? {
+        b: item.completed,
+        c: common_vendor.t(item.todo),
+        d: common_vendor.o(() => {
+        }, index),
+        e: common_vendor.o(($event) => $options.radioChange(item.id, "completed"), index),
+        f: "01f8c46d-2-" + i0 + "," + ("01f8c46d-1-" + i0),
+        g: common_vendor.p({
+          type: "right",
+          size: "18"
+        }),
+        h: common_vendor.o(($event) => $options.onOpenTodo(item.id), index),
+        i: common_vendor.o(($event) => $options.deleteItem(item.id), index),
+        j: "01f8c46d-1-" + i0
+      } : {}, {
+        k: index
+      });
     }),
-    f: common_vendor.p({
-      align: "center"
+    e: common_vendor.f($data.todoList, (item, index, i0) => {
+      return common_vendor.e({
+        a: item.completed
+      }, item.completed ? {
+        b: common_vendor.t(item.todo),
+        c: common_vendor.o(($event) => $options.radioChange(item.id, "noCompleted"), index),
+        d: common_vendor.o(() => {
+        }, index),
+        e: "01f8c46d-4-" + i0 + "," + ("01f8c46d-3-" + i0),
+        f: common_vendor.p({
+          type: "right",
+          size: "18"
+        }),
+        g: common_vendor.o(($event) => $options.onOpenTodo(item.id), index),
+        h: common_vendor.o(($event) => $options.deleteItem(item.id), index),
+        i: "01f8c46d-3-" + i0
+      } : {}, {
+        j: index
+      });
     }),
-    g: common_vendor.f($data.todoList, (item, index, i0) => {
-      return {
-        a: common_vendor.t(item.todo),
-        b: "19453598-6-" + i0 + "," + ("19453598-5-" + i0),
-        c: common_vendor.t(item.completed ? "完成" : "未完成"),
-        d: "19453598-7-" + i0 + "," + ("19453598-5-" + i0),
-        e: common_vendor.o(($event) => $options.updateItem(item), index),
-        f: common_vendor.o(($event) => $options.deleteItem(item.id), index),
-        g: "19453598-8-" + i0 + "," + ("19453598-5-" + i0),
-        h: index,
-        i: "19453598-5-" + i0 + ",19453598-0"
-      };
-    }),
-    h: common_vendor.p({
-      align: "center"
-    }),
-    i: common_vendor.sr("table", "19453598-0"),
-    j: common_vendor.p({
-      loading: $data.loading,
-      border: true,
-      emptyText: "暂无更多数据"
-    }),
-    k: common_vendor.o($options.change),
-    l: common_vendor.p({
-      ["show-icon"]: true,
-      ["page-size"]: $data.pageSize,
-      current: $data.pageCurrent,
-      total: $data.total
-    }),
-    m: common_vendor.o((...args) => $options.addItem && $options.addItem(...args)),
-    n: common_vendor.o(($event) => $data.formData.todo = $event),
-    o: common_vendor.p({
-      type: "text",
-      placeholder: "请输入姓名",
-      modelValue: $data.formData.todo
-    }),
-    p: common_vendor.p({
-      required: true,
-      label: "待办事项",
-      name: "todo"
-    }),
-    q: $data.formData.completed,
-    r: common_vendor.o((...args) => _ctx.handerComplete && _ctx.handerComplete(...args)),
-    s: common_vendor.p({
-      required: true,
-      name: "completed",
-      label: "是否完成"
-    }),
-    t: common_vendor.p({
-      modelValue: $data.formData,
-      ["label-position"]: "top"
-    }),
-    v: common_vendor.o($options.close),
-    w: common_vendor.o($options.confirm),
-    x: common_vendor.p({
-      title: $data.todo_id ? "修改" : "添加",
-      duration: 2e3,
-      ["before-close"]: true
-    }),
-    y: common_vendor.sr("popup", "19453598-10"),
-    z: common_vendor.p({
-      type: "dialog"
-    })
+    f: common_vendor.o((...args) => $options.addItem && $options.addItem(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/todo/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli或npx创建模版/uni-app-template/pages/todo/index.vue"]]);
 wx.createPage(MiniProgramPage);

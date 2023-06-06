@@ -1,166 +1,82 @@
 <template>
-	<view class="container">
-		<view class="search">
-			<input class="input" @confirm="handerSearch" v-model="searchVal" type="text" maxlength="20" placeholder="搜索" />
+	<view>
+		<view class="container2">
+			<text class="top-banner">ToDoList</text>
+			<view class="search">
+				<uni-search-bar v-model="searchVal" @confirm="handerSearch"></uni-search-bar>
+			</view>
+			<view class="left-title">未完成</view>
 		</view>
-		<uni-table ref="table" :loading="loading" border emptyText="暂无更多数据">
-			<uni-tr>
-				<uni-th  align="center">待办事项</uni-th>
-				<uni-th  align="center">是否完成</uni-th>
-				<uni-th  align="center">操作</uni-th>
-			</uni-tr>
-			<uni-tr v-for="(item, index) in todoList" :key="index">
-				<uni-td>{{ item.todo }}</uni-td>
-				<uni-td align="center">{{ item.completed ? '完成' : '未完成' }}</uni-td>
-				<uni-td>
-					<view class="uni-group">
-						<button class="uni-button" size="mini" @click="updateItem(item)" type="primary">修改</button>
-						<button class="uni-button" size="mini" @click="deleteItem(item.id)" type="warn">删除</button>
+		<template v-for="(item, index) in todoList" :key="index">
+			<uni-swipe-action-item v-if="!item.completed">
+				<view class="swiper-item" @click="onOpenTodo(item.id)">
+				  <radio-group  @change="radioChange(item.id,'completed')">
+					<view @click.stop="">
+					  <radio :checked="item.completed" />{{item.todo}}
 					</view>
-				</uni-td>
-			</uni-tr>
-		</uni-table>
-		<view class="uni-pagination-box"><uni-pagination show-icon :page-size="pageSize" :current="pageCurrent" :total="total" @change="change" /></view>
-
-		<button class="add-btn" @click="addItem">添加</button>
-		<uni-popup ref="popup" type="dialog">
-			<uni-popup-dialog :title="todo_id ? '修改' : '添加'" :duration="2000" :before-close="true" @close="close" @confirm="confirm">
-				<view class="">
-						<uni-forms :modelValue="formData" label-position="top">
-							<uni-forms-item required label="待办事项" name="todo">
-								<uni-easyinput type="text" v-model="formData.todo" placeholder="请输入姓名" />
-							</uni-forms-item>
-							<uni-forms-item required name="completed" label="是否完成">
-								<switch :checked="formData.completed" @change="handerComplete"/>
-							</uni-forms-item>
-						</uni-forms>
+				  </radio-group>
+					<uni-icons type="right" size="18"></uni-icons>
+				</view>
+				<template v-slot:right @click.capture.prevent>
+					<view @click.stop="deleteItem(item.id)" class="swipe-cell__right"><text>删除</text></view>
+				</template>
+			</uni-swipe-action-item>
+		</template>
+		<view class="container2">
+			<view class="left-title">已完成</view>
+		</view>
+		<template v-for="(item, index) in todoList" :key="index">
+			<uni-swipe-action-item v-if="item.completed">
+				<view class="swiper-item" @click="onOpenTodo(item.id)">
+				  <radio-group @click.stop="">
+					<view @click.stop="radioChange(item.id,'noCompleted')">
+					  <radio checked="true" />{{item.todo}} 
 					</view>
-			</uni-popup-dialog>
-		</uni-popup>
+				</radio-group>
+					<uni-icons type="right" size="18"></uni-icons>
+				</view>
+				<template v-slot:right @click.capture.prevent>
+					<view @click.stop="deleteItem(item.id)" class="swipe-cell__right"><text>删除</text></view>
+				</template>
+			</uni-swipe-action-item>
+		</template>
+		<view class="container2">
+			<button class="add-btn" @click="addItem">新建</button>
+		</view>
 	</view>
 </template>
 <script>
-import { FetchTodo, FetchPage, SearchText, UpdateTodo, AddTodo, DeleteTodo } from './api';
+import {
+	FetchPage,
+	SearchText,
+	UpdateTodo,
+	DeleteTodo
+} from './api';
 export default {
 	data() {
 		return {
 			searchVal: '',
 			todoList: [],
-			// 每页数据量
-			pageSize: 10,
-			// 当前页
-			pageCurrent: 1,
-			// 数据总量
-			total: 0,
-			loading: false,
-			showModal: false,
-			completeCheck: false,
 			user_id: null,
 			todo_id: null,
-			start: 0,
-			end: 9,
-			formData:{}
+			formData: {}
 		}
 
 	},
 	// 获取列表
 	onLoad: function (options) {
-		this.getTodoList(this.start, this.end);
-		this.allCount();
+		this.getTodoList();
 	},
 	methods: {
-	   deleteItem(id){
-		     DeleteTodo(id)
-		       .then((res) => {
-		         this.getTodoList(this.start, this.end);
-				 uni.showToast({
-				 	title: '删除成功！',
-				 	icon: 'none',
-				 	duration: 2000
-				 })
-		       })
-		       .catch((err) => {
+		deleteItem(id) {
+			DeleteTodo(id)
+				.then((res) => {
+					this.getTodoList();
 					uni.showToast({
-						title: err,
+						title: '删除成功！',
 						icon: 'none',
 						duration: 2000
 					})
-		       });
-	   },
-	   updateItem(item){
-		   this.formData.todo = item.todo;
-		   this.formData.completed = item.completed;
-		   this.todo_id = item.id;
-		   this.$refs.popup.open()
-	   },
-		/**
-		 * 点击取消按钮触发
-		 * @param {Object} done
-		 */
-		close() {
-			this.$refs.popup.close()
-		},
-		confirm() {
-			  if (!this.todo_id) {
-			    AddTodo({
-			      user_id: getApp().globalData.userInfo.id,
-				  ...this.formData
-			    })
-			      .then((res) => {
-			        this.getTodoList(this.start, this.end);
-					this.$refs.popup.close()
-			        uni.showToast({
-			        	title: '添加成功！',
-			        	icon: 'none',
-			        	duration: 2000
-			        })
-			      })
-			      .catch((err) => {
-			        uni.showToast({
-			        	title: err,
-			        	icon: 'none',
-			        	duration: 2000
-			        })
-			      });
-			  } else if (this.todo_id) {
-			    UpdateTodo(this.formData,this.todo_id)
-			      .then((res) => {
-			        this.getTodoList(this.start, this.end);
-					this.$refs.popup.close()
-			        uni.showToast({
-			        	title: '修改成功！',
-			        	icon: 'none',
-			        	duration: 2000
-			        })
-			      })
-			      .catch((err) => {
-			        uni.showToast({
-			        	title: err,
-			        	icon: 'none',
-			        	duration: 2000
-			        })
-			      });
-			  }
-			
-		},
-		// 分页触发
-		change(e) {
-			this.$refs.table.clearSelection();
-		    this.start = e.current * 10 - 10;
-		    this.end = e.current * 10 - 1;
-		    this.getTodoList(e.current * 10 - 10, e.current * 10 - 1);
-		},
-	    addItem() {
-		   this.formData = {};
-		   this.todo_id = null;
-		   this.$refs.popup.open()
-	    },
-		// 获取数据
-		getTodoList(start, end) {
-			FetchPage(start, end)
-				.then((res) => {
-					this.todoList = res;
-					this.allCount();
 				})
 				.catch((err) => {
 					uni.showToast({
@@ -170,29 +86,72 @@ export default {
 					})
 				});
 		},
-		allCount() {
-			FetchTodo()
+		addItem() {
+			uni.navigateTo({
+				url: '/pages/addTodo/index'
+			})
+		},
+		onOpenTodo(id) {
+			uni.navigateTo({
+				url: '/pages/addTodo/index?id=' + id
+			})
+		},
+		radioChange(id,type) {
+			if(type === 'completed'){
+				UpdateTodo({
+					completed: true
+				}, id)
+					.then((res) => {
+						this.getTodoList()
+					})
+					.catch((err) => {
+						uni.showToast({
+							title: err,
+							icon: "none",
+							duration: 2000,
+						});
+					});
+			}else if(type === 'nocCompleted'){
+				UpdateTodo({
+					completed: false
+				}, id)
+					.then((res) => {
+						this.getTodoList()
+					})
+					.catch((err) => {
+						uni.showToast({
+							title: err,
+							icon: "none",
+							duration: 2000,
+						});
+					});
+			}
+			
+		},
+		// 获取数据
+		getTodoList() {
+			FetchPage()
 				.then((res) => {
-					this.total = res;
+					this.todoList = res;
 				})
 				.catch((err) => {
 					uni.showToast({
 						title: err,
 						icon: 'none',
 						duration: 2000
-					});
+					})
 				});
 		},
 		async handerSearch() {
-			SearchText(this.searchVal).then((res) =>{
+			SearchText(this.searchVal).then((res) => {
 				this.todoList = res
 			}).catch((err) => {
-					uni.showToast({
-						title: err,
-						icon: 'none',
-						duration: 2000
-					});
+				uni.showToast({
+					title: err,
+					icon: 'none',
+					duration: 2000
 				});
+			});
 		}
 	}
 }

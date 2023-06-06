@@ -7,7 +7,8 @@
     "pages/messages/index",
     "pages/userinfo/index",
     "pages/todo/index",
-    "pages/filestorage/index"
+    "pages/filestorage/index",
+    "pages/addTodo/index"
   ],
   "window": {
     "backgroundColor": "#FFFFFF",
@@ -35,6 +36,5 @@
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

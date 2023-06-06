@@ -15,10 +15,44 @@ const _sfc_main = {
         { name: "视频", id: 3 }
       ],
       activeItem: 0,
-      imageValue: ""
+      imageValue: "",
+      itemFileName: "",
+      currentIndex: 0
+      //默认是活动项
     };
   },
   methods: {
+    pagechange(e) {
+      if ("touch" === e.detail.source) {
+        this.currentIndex = e.detail.current;
+        pages_filestorage_api.ListProfixFile(this.btnList[this.currentIndex].name).then((res) => {
+          this.fileList = res;
+        }).catch((err) => {
+          common_vendor.index.showToast({
+            title: err,
+            icon: "none",
+            duration: 2e3
+          });
+        });
+      }
+    },
+    onOpenPop(name) {
+      this.$refs.popup.open();
+      this.itemFileName = name;
+    },
+    //点击tab时触发
+    titleClick(e) {
+      this.currentIndex = e;
+      pages_filestorage_api.ListProfixFile(this.btnList[this.currentIndex].name).then((res) => {
+        this.fileList = res;
+      }).catch((err) => {
+        common_vendor.index.showToast({
+          title: err,
+          icon: "none",
+          duration: 2e3
+        });
+      });
+    },
     select(res) {
       const that = this;
       if (res) {
@@ -41,7 +75,8 @@ const _sfc_main = {
         });
       }
     },
-    async downloadFile(name) {
+    async downloadFile() {
+      const name = this.itemFileName;
       const { data, error } = await lib_supabaseClient.supabase.storage.from("files").createSignedUrl(name, 60);
       common_vendor.index.downloadFile({
         url: data.signedUrl,
@@ -115,6 +150,7 @@ const _sfc_main = {
               }
             });
           }
+          this.$refs.popup.close();
         }
       });
     },
@@ -129,19 +165,8 @@ const _sfc_main = {
         });
       });
     },
-    handertab(id) {
-      this.activeItem = id;
-      pages_filestorage_api.ListProfixFile(this.btnList[this.activeItem].name).then((res) => {
-        this.fileList = res;
-      }).catch((err) => {
-        common_vendor.index.showToast({
-          title: err,
-          icon: "none",
-          duration: 2e3
-        });
-      });
-    },
-    async removeFile(name) {
+    async removeFile() {
+      const name = this.itemFileName;
       pages_filestorage_api.RemoveFile(name).then((res) => {
         common_vendor.index.showToast({
           title: "删除成功",
@@ -149,6 +174,7 @@ const _sfc_main = {
           duration: 2e3
         });
         this.getListFile();
+        this.$refs.popup.close();
       }).catch((err) => {
         common_vendor.index.showToast({
           title: err,
@@ -173,7 +199,7 @@ const _sfc_main = {
           });
           if (error) {
             common_vendor.wx$1.showToast({
-              title: error.message || error.error_description,
+              title: error.data.message || error.data.error_description,
               icon: "none",
               duration: 2e3
             });
@@ -183,7 +209,7 @@ const _sfc_main = {
               icon: "none",
               duration: 2e3
             });
-            that.ListFile();
+            that.getListFile();
           }
         }
       });
@@ -197,77 +223,72 @@ const _sfc_main = {
   }
 };
 if (!Array) {
-  const _easycom_uni_th2 = common_vendor.resolveComponent("uni-th");
-  const _easycom_uni_tr2 = common_vendor.resolveComponent("uni-tr");
-  const _easycom_uni_td2 = common_vendor.resolveComponent("uni-td");
-  const _easycom_uni_table2 = common_vendor.resolveComponent("uni-table");
-  const _easycom_uni_file_picker2 = common_vendor.resolveComponent("uni-file-picker");
-  (_easycom_uni_th2 + _easycom_uni_tr2 + _easycom_uni_td2 + _easycom_uni_table2 + _easycom_uni_file_picker2)();
+  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
+  _easycom_uni_popup2();
 }
-const _easycom_uni_th = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-th/uni-th.js";
-const _easycom_uni_tr = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-tr/uni-tr.js";
-const _easycom_uni_td = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-td/uni-td.js";
-const _easycom_uni_table = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-table/uni-table.js";
-const _easycom_uni_file_picker = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-file-picker/uni-file-picker.js";
+const _easycom_uni_popup = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup.js";
 if (!Math) {
-  (_easycom_uni_th + _easycom_uni_tr + _easycom_uni_td + _easycom_uni_table + _easycom_uni_file_picker)();
+  _easycom_uni_popup();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.f($data.btnList, (item, index, i0) => {
       return {
         a: common_vendor.t(item.name),
-        b: common_vendor.n($data.activeItem === item.id ? "selected item-st" : "item-st"),
-        c: common_vendor.o(($event) => $options.handertab(item.id), index),
-        d: index
+        b: common_vendor.n(index == $data.currentIndex ? "fontColorBox" : ""),
+        c: common_vendor.n(index == $data.currentIndex ? "lineBox titleBox" : "titleBox"),
+        d: index,
+        e: common_vendor.o(($event) => $options.titleClick(index), index)
       };
     }),
-    b: common_vendor.p({
-      align: "center"
-    }),
-    c: common_vendor.p({
-      align: "center"
-    }),
-    d: common_vendor.p({
-      align: "center"
-    }),
-    e: common_vendor.p({
-      align: "center"
-    }),
-    f: common_vendor.f($data.fileList, (item, index, i0) => {
+    b: common_vendor.f($data.fileList, (item, index, i0) => {
       return {
         a: common_vendor.t(item.name),
-        b: "a0e9a77a-7-" + i0 + "," + ("a0e9a77a-6-" + i0),
-        c: common_vendor.t(item.size),
-        d: "a0e9a77a-8-" + i0 + "," + ("a0e9a77a-6-" + i0),
-        e: common_vendor.t(item.created_at),
-        f: "a0e9a77a-9-" + i0 + "," + ("a0e9a77a-6-" + i0),
-        g: common_vendor.o(($event) => $options.downloadFile(item.name), index),
-        h: common_vendor.o(($event) => $options.removeFile(item.name), index),
-        i: "a0e9a77a-10-" + i0 + "," + ("a0e9a77a-6-" + i0),
-        j: index,
-        k: "a0e9a77a-6-" + i0 + ",a0e9a77a-0"
+        b: common_vendor.t(item.size),
+        c: common_vendor.t(item.created_at),
+        d: index,
+        e: common_vendor.o(($event) => $options.onOpenPop(item.name), index)
       };
     }),
-    g: common_vendor.p({
-      align: "center"
+    c: common_vendor.f($data.fileList, (item, index, i0) => {
+      return {
+        a: common_vendor.t(item.name),
+        b: common_vendor.t(item.size),
+        c: common_vendor.t(item.created_at),
+        d: index,
+        e: common_vendor.o(($event) => $options.onOpenPop(item.name), index)
+      };
     }),
-    h: common_vendor.p({
-      align: "center"
+    d: common_vendor.f($data.fileList, (item, index, i0) => {
+      return {
+        a: common_vendor.t(item.name),
+        b: common_vendor.t(item.size),
+        c: common_vendor.t(item.created_at),
+        d: index,
+        e: common_vendor.o(($event) => $options.onOpenPop(item.name), index)
+      };
     }),
-    i: common_vendor.sr("table", "a0e9a77a-0"),
-    j: common_vendor.p({
-      loading: _ctx.loading,
-      border: true,
-      emptyText: "暂无更多数据"
+    e: common_vendor.f($data.fileList, (item, index, i0) => {
+      return {
+        a: common_vendor.t(item.name),
+        b: common_vendor.t(item.size),
+        c: common_vendor.t(item.created_at),
+        d: index,
+        e: common_vendor.o(($event) => $options.onOpenPop(item.name), index)
+      };
     }),
-    k: common_vendor.o($options.select),
-    l: common_vendor.o(($event) => _ctx.fileValue = $event),
+    f: common_vendor.o((...args) => $options.pagechange && $options.pagechange(...args)),
+    g: $data.currentIndex,
+    h: common_vendor.o((...args) => $options.onUpload && $options.onUpload(...args)),
+    i: common_vendor.o((...args) => $options.downloadFile && $options.downloadFile(...args)),
+    j: common_vendor.o((...args) => $options.removeFile && $options.removeFile(...args)),
+    k: common_vendor.o((...args) => _ctx.onClosePop && _ctx.onClosePop(...args)),
+    l: common_vendor.sr("popup", "7cb633ce-0"),
     m: common_vendor.p({
-      ["file-mediatype"]: "all",
-      modelValue: _ctx.fileValue
+      ["background-color"]: "#fff",
+      type: "bottom"
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/pages/filestorage/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/使用cli或npx创建模版/uni-app-template/pages/filestorage/index.vue"]]);
 wx.createPage(MiniProgramPage);

@@ -11,6 +11,7 @@ if (!Math) {
   "./pages/userinfo/index.js";
   "./pages/todo/index.js";
   "./pages/filestorage/index.js";
+  "./pages/addTodo/index.js";
 }
 const _sfc_main = {
   globalData: {
@@ -33,7 +34,7 @@ const _sfc_main = {
     console.log("App Show");
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/project/使用cli创建vue和react模板/uni-app/uni-app-template/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/project/使用cli或npx创建模版/uni-app-template/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   return {

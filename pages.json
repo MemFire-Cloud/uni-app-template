@@ -75,6 +75,11 @@
 			"style": {
 				"navigationBarTitleText": "网盘"
 			}
+		},{
+			"path": "pages/addTodo/index",
+			"style": {
+				"navigationBarTitleText": "标题"
+			}
 		}
 	],
 	"globalStyle": {

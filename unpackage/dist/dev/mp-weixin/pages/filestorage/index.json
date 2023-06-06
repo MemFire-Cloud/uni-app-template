@@ -1,10 +1,6 @@
 {
   "navigationBarTitleText": "网盘",
   "usingComponents": {
-    "uni-th": "../../node-modules/@dcloudio/uni-ui/lib/uni-th/uni-th",
-    "uni-tr": "../../node-modules/@dcloudio/uni-ui/lib/uni-tr/uni-tr",
-    "uni-td": "../../node-modules/@dcloudio/uni-ui/lib/uni-td/uni-td",
-    "uni-table": "../../node-modules/@dcloudio/uni-ui/lib/uni-table/uni-table",
-    "uni-file-picker": "../../node-modules/@dcloudio/uni-ui/lib/uni-file-picker/uni-file-picker"
+    "uni-popup": "../../node-modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup"
   }
 }
